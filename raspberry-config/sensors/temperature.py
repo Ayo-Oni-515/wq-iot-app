@@ -25,3 +25,5 @@ external resistor.
 
 **Enable the 1-wire protocol.
 """
+
+#!/usr/bin/env python3
