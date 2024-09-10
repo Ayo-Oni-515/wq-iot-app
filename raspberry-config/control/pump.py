@@ -27,3 +27,5 @@ Threshold Value:
 """
 
 #!/usr/bin/env python3
+
+pump_threshold = 2000

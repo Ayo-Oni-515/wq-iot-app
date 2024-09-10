@@ -24,3 +24,5 @@ Threshold Value:
 """
 
 #!/usr/bin/env python3
+
+value = 10
