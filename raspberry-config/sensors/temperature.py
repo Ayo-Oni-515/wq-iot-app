@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Temperature Sensor: BOJACK DS18B20 Temperature Sensor Module Kit 
 with Waterproof Stainless Steel Probe for Raspberry Pi
@@ -26,4 +28,5 @@ external resistor.
 **Enable the 1-wire protocol.
 """
 
-#!/usr/bin/env python3
+def temperature(args):
+    pass

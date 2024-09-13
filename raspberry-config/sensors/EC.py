@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Electrical Conductivity Sensor: Gravity: Analog TDS Sensor for Arduino.
 "Calculations will be made from the TDS sensor(TDS.py)"
@@ -23,6 +25,11 @@ Threshold Value:
 **Requires ADC(MCP3208) -> 12-bit 
 """
 
-#!/usr/bin/env python3
-
 value = 10
+
+
+def tds_to_ec(args):
+    pass
+
+def ec(args):
+    pass

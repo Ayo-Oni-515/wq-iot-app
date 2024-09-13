@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 pH Sensor: Liquid PH 0-14 Value Sensor Module Accuracy 0.1pH + BNC Connect Terminal PH 
 Electrode Probe Kit, PH Detection detect Sensor Module for Arduino.
@@ -25,4 +27,5 @@ Threshold Value:
 **Requires ADC(MCP3208) -> 12-bit 
 """
 
-#!/usr/bin/env python3
+def ph(args):
+    pass

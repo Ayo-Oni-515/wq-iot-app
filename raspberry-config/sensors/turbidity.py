@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Turbidity Sensor: DFRobot Gravity Analog Turbidity Sensor.
 
@@ -20,4 +22,5 @@ Threshold Value:
 **Requires ADC(MCP3208) -> 12-bit 
 """
 
-#!/usr/bin/env python3
+def turbidity(args):
+    pass

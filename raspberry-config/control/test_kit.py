@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Containment Ultrasonic Sensor: HC-SR04 Ultrasonic Sensor Module.
 
@@ -28,6 +30,3 @@ Resolution: 0.3cm
 Threshold Value:
 
 """
-
-
-#!/usr/bin/env python3

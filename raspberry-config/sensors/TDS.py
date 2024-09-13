@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Total Dissolved Solids(TDS) Sensor: Gravity: Analog TDS Sensor for Arduino.
 
@@ -22,4 +24,5 @@ Threshold Value:
 **Requires ADC(MCP3208) -> 12-bit 
 """
 
-#!/usr/bin/env python3
+def tds(args):
+    pass

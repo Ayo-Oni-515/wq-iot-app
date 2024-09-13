@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from sensors import EC
 from sensors import pH
 from sensors import TDS

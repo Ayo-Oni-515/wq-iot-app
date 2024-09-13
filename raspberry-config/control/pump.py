@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Waterproof Ultrasonic Sensor: JSN-SR04T Integrated Ultrasonic Distance 
 Measuring Sensor Transducer Module Waterproof.
@@ -25,7 +27,5 @@ Blind Area: 20cm
 Threshold Value:
 
 """
-
-#!/usr/bin/env python3
 
 pump_threshold = 2000
