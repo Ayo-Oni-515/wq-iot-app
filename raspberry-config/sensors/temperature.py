@@ -25,8 +25,17 @@ Adapter module is equipped with a pull-up resistor, and
 directly connects to the GPIO of the Raspberry Pi without an 
 external resistor.
 
+Interfacing Protocol: 1-Wire Protocol.
+
 **Enable the 1-wire protocol.
 """
+
+def temperature_post(args):
+    '''
+    Meant to perform Power On Self Test (POST)
+    '''
+    pass
+
 
 def temperature(args):
     pass

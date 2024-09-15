@@ -21,19 +21,31 @@ from sensors import *
 from control import *
 from errors import *
 
+
+#GPIO cleanup from previous state (Automatically resets the GPIO Pins before startup)
+# GPIO.cleanup()
+
+
 #GPIO setup
 # GPIO.setmode(GPIO.BCM)
-# GPIO.setup()
-# GPIO.setup()
-# GPIO.setup()
-# GPIO.setup()
-# GPIO.setup()
-# GPIO.setup()
-
-print(EC.value)
-print(pump.pump_threshold)
-
-#SENSORS
 
 
-#CONTROL
+#SENSORS GPIO Initialization
+# GPIO.setup(EC_GPIO, GPIO.IN)
+# GPIO.setup(PH_GPIO, GPIO.IN)
+# GPIO.setup(TDS_GPIO, GPIO.IN)
+# GPIO.setup(TEMPERATURE_GPIO, GPIO.IN)
+# GPIO.setup(TURBIDITY_GPIO, GPIO.IN)
+
+
+#CONTROL GPIO Initialization
+# GPIO.setup(PUMP_GPIO, GPIO.IN)
+# GPIO.setup(TEST_KIT_GPIO, GPIO.IN)
+# GPIO.setup(VALVES_GPIO, GPIO.IN)
+
+# print(EC.value)
+# print(pump.pump_threshold)
+# print(PH_GPIO)
+
+
+# GPIO.cleanup()

@@ -7,7 +7,7 @@ Operating Voltage: 5.0V
 
 Operating Current: 40mA (MAX)
 
-Analog Output: 0.0 ~ 4.5V
+Analog Output: 0.0 ~ 4.5V (>3.3v reference)
 
 Control Voltage (Input) : 
                 
@@ -19,8 +19,17 @@ Conversion Factor:
 
 Threshold Value:
 
+Interfacing Protocol: SPI (Serial Peripheral Interface)
+
 **Requires ADC(MCP3208) -> 12-bit 
 """
+
+def turbidity_post(args):
+    '''
+    Meant to perform Power On Self Test (POST)
+    '''
+    pass
+
 
 def turbidity(args):
     pass
