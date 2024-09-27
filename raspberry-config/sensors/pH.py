@@ -26,14 +26,15 @@ Threshold Value:
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
 
-**Requires ADC(MCP3208) -> 12-bit 
+**Requires ADC(MCP3008) -> 10-bit (2 μA max)
 """
 
-def ph_post(args):
+def ph_post(channel, args):
     '''
     Meant to perform Power On Self Test (POST)
     '''
-    pass
+    status = 0
+    return status
 
 
 def ph(args):

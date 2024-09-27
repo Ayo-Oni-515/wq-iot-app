@@ -16,7 +16,7 @@ Conversion Factor:
 
 Measuring Range: -55℃ ~ +125℃ (-67℉ ~ +257℉)
 
-Resolution: 9-bit ~ 12-bit
+Resolution: 9-bit ~ 12-bit (10-bit)
 
 Threshold Value:
 

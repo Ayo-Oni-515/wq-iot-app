@@ -3,11 +3,11 @@
 """
 Total Dissolved Solids(TDS) Sensor: Gravity: Analog TDS Sensor for Arduino.
 
-Operating Voltage: 3.3V ~ 5.0V
+Operating Voltage: 3.3V ~ 5.5V
 
 Analog Output: 0 ~ 2.3V (<3.3v reference)
 
-Control Signal  (Input) : 3.3 ~ 5.0V
+Control Signal  (Input) : 
 
 Type: Analog Sensor.
 
@@ -23,7 +23,7 @@ Threshold Value:
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
 
-**Requires ADC(MCP3208) -> 12-bit 
+**Requires ADC(MCP3008) -> 10-bit 
 """
 
 def tds_post(args):

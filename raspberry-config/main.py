@@ -38,6 +38,8 @@ from errors import *
 # GPIO.setup(TURBIDITY_GPIO, GPIO.IN)
 
 
+#Intefacing should be done using SPI 
+
 #CONTROL GPIO Initialization
 # GPIO.setup(PUMP_GPIO, GPIO.IN)
 # GPIO.setup(TEST_KIT_GPIO, GPIO.IN)

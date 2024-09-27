@@ -21,7 +21,7 @@ Threshold Value:
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
 
-**Requires ADC(MCP3208) -> 12-bit 
+**Requires ADC(MCP3008) -> 10-bit 
 """
 
 def turbidity_post(args):
