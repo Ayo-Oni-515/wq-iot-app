@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:wqm_app/currencyconverter.dart';
 
-
-// // import 'package:wqm_app/home.dart';
-// import 'package:wqm_app/sandbox.dart';
+// import 'package:wqm_app/home.dart';
+// // import 'package:wqm_app/sandbox.dart';
 
 // void main() {
-//   runApp(const MaterialApp(home: Sandbox()));
+//   // runApp(const MaterialApp(home: Home()));
+//   runApp(MaterialApp(home: Currencyconverter()));
 // }
 
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+// import 'package:wqm_app/home.dart';
 
 void main() {
   runApp(const WaterQualityApp());
@@ -25,6 +27,7 @@ class WaterQualityApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
   }
