@@ -15,7 +15,7 @@ Unit: Meters (m)
 
 Conversion Factor:
 
-Measuring Range: 2 ~ 450m.
+Measuring Range: 2 ~ 450cm.
 
 Effectual Angle: 15°
 
