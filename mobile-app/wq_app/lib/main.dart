@@ -1,6 +1,16 @@
-// This is the home dart file for the flutter app.
+// import 'package:flutter/material.dart';
+// // import 'package:wqm_app/home.dart';
+// import 'package:wq_app/sandbox.dart';
+
+// void main() {
+//   runApp(const MaterialApp(home: Sandbox()));
+// }
 
 import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const WaterQualityApp());
+}
 
 class WaterQualityApp extends StatelessWidget {
   const WaterQualityApp({super.key});
@@ -13,7 +23,6 @@ class WaterQualityApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
   }
@@ -23,7 +32,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
