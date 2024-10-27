@@ -17,18 +17,21 @@ class WqmHome extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color.fromRGBO(227, 242, 253, 1),
-          primary: Color.fromRGBO(107, 208, 255, 1),
+          primary: Color.fromRGBO(126, 209, 248, 1),
         ),
         useMaterial3: true,
         textTheme: GoogleFonts.latoTextTheme(const TextTheme(
           titleLarge: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Color.fromRGBO(45, 62, 78, 1)),
-          titleMedium:
-              TextStyle(fontSize: 23, color: Color.fromRGBO(45, 62, 78, 1)),
-          titleSmall:
-              TextStyle(fontSize: 16, color: Color.fromRGBO(45, 62, 78, 1)),
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+          // color: Color.fromRGBO(45, 62, 78, 1)),
+          titleMedium: TextStyle(
+            fontSize: 23,
+          ),
+          titleSmall: TextStyle(
+            fontSize: 16,
+          ),
         )),
       ),
       debugShowCheckedModeBanner: false,
