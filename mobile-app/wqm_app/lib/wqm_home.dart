@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wqm_app/pages.dart';
 import 'cards.dart';
+
+// This is the home dart file for the flutter app.
 
 class WqmHomeState extends StatefulWidget {
   const WqmHomeState({super.key});
@@ -18,11 +21,16 @@ class _WqmHomeStateState extends State<WqmHomeState> {
     return Scaffold(
         appBar: AppBar(
           // centerTitle: true,
+          leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+
           title: Text(
             'WQM App',
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.sync))],
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.sync))
+          ],
         ),
         body: IndexedStack(
           index: currentScreen,
@@ -64,7 +72,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //WQI Chart Chart: Use Gauge Chart
               WaterMainCard(
                 cardTitle: 'WQI',
               ),
@@ -74,10 +81,9 @@ class _HomePageState extends State<HomePage> {
               WaterMainCard(
                 cardTitle: 'Water Level',
               ),
-
               //Water Level Chart: Use Liquid Progress Indicator
               SizedBox(
-                height: 20,
+                height: 30,
               ),
               //Parameter List. Make a List view Builder
               Text(
@@ -85,17 +91,39 @@ class _HomePageState extends State<HomePage> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               //Parameter 1
-              ParameterListCard(parameter: 'pH', parameterValue: 7.1, displayIcon: 'assets/icons/ph_icon.png',),
-              ParameterListCard(parameter: 'Temperature', parameterValue: 25, displayIcon: 'assets/icons/temperature_icon.png', unit: '°C',),
-              ParameterListCard(parameter: 'Turbidity', parameterValue: 20, displayIcon: 'assets/icons/turbidity_icon.png', unit: 'NTU',),
-              ParameterListCard(parameter: 'Total Dissolved Solids', parameterValue: 7.1, displayIcon: 'assets/icons/tds_icon.png',),
-              ParameterListCard(parameter: 'Electrical Conductivity', parameterValue: 7.1, displayIcon: 'assets/icons/ec_icon.png',),
+              ParameterListCard(
+                parameter: 'pH',
+                parameterValue: 7.1,
+                displayIcon: 'assets/icons/ph_icon.png',
+              ),
+              ParameterListCard(
+                parameter: 'Temperature',
+                parameterValue: 25,
+                displayIcon: 'assets/icons/temperature_icon.png',
+                unit: '°C',
+              ),
+              ParameterListCard(
+                parameter: 'Turbidity',
+                parameterValue: 20,
+                displayIcon: 'assets/icons/turbidity_icon.png',
+                unit: 'NTU',
+              ),
+              ParameterListCard(
+                parameter: 'Total Dissolved Solids',
+                parameterValue: 7.1,
+                displayIcon: 'assets/icons/tds_icon.png',
+              ),
+              ParameterListCard(
+                parameter: 'Electrical Conductivity',
+                parameterValue: 7.1,
+                displayIcon: 'assets/icons/ec_icon.png',
+              ),
               //Add colour change to the "view more..." text
               GestureDetector(
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return UnderConstruction();
+                    return WaterParameterListPage();
                   }));
                 },
                 child: const Text(

@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^5.4.3
   firebase_analytics: ^11.3.3
   google_fonts: ^6.2.1
+  syncfusion_flutter_gauges: ^27.1.56
+  fl_chart: ^0.69.0
 
 dev_dependencies:
   flutter_test:

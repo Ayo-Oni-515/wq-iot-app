@@ -17,7 +17,7 @@ class WqmHome extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color.fromRGBO(227, 242, 253, 1),
-          primary: Color.fromRGBO(126, 209, 248, 1),
+          primary: Color.fromRGBO(38, 155, 255, 1),
         ),
         useMaterial3: true,
         textTheme: GoogleFonts.latoTextTheme(const TextTheme(

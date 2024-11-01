@@ -13,6 +13,7 @@ import time
 
 # Importing Raspberry pi packages
 # import RPi.GPIO as GPIO
+# import spidev
 
 
 #Importing Essential Packages
@@ -31,7 +32,7 @@ from errors import *
 
 
 #SENSORS GPIO Initialization
-# GPIO.setup(EC_GPIO, GPIO.IN)
+# GPIO.setup(EC_GPIO, GPIO.IN) (Not needed)
 # GPIO.setup(PH_GPIO, GPIO.IN)
 # GPIO.setup(TDS_GPIO, GPIO.IN)
 # GPIO.setup(TEMPERATURE_GPIO, GPIO.IN)

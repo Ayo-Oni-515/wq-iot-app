@@ -39,3 +39,17 @@ def temperature_post(args):
 
 def temperature(args):
     pass
+
+
+
+#From ChatGPT
+# from w1thermsensor import W1ThermSensor
+
+# # Initialize the sensor
+# sensor = W1ThermSensor()
+
+# # Read temperature
+# temperature_celsius = sensor.get_temperature()
+# temperature_fahrenheit = sensor.get_temperature(W1ThermSensor.DEGREES_F)
+
+# print(f"Temperature: {temperature_celsius:.2f}°C / {temperature_fahrenheit:.2f}°F")

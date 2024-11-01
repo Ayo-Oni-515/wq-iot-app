@@ -1,5 +1,3 @@
-// This is the home dart file for the flutter app.
-
 import 'package:flutter/material.dart';
 
 class WaterQualityApp extends StatelessWidget {

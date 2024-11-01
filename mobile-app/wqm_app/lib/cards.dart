@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:wqm_app/charts.dart';
+import 'package:wqm_app/pages.dart';
 
 // Cards => Start
-//Use Line chart for trends page
-class WaterMainCard extends StatelessWidget {
+//Use Line chart for Overview
+class WaterMainCard extends StatefulWidget {
   final String cardTitle;
-  final Widget trendPage;
 
-  const WaterMainCard(
-      {super.key,
-      required this.cardTitle,
-      this.trendPage = const UnderConstruction()});
+  const WaterMainCard({super.key, required this.cardTitle});
 
+  @override
+  State<WaterMainCard> createState() => _WaterMainCardState();
+}
+
+class _WaterMainCardState extends State<WaterMainCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return trendPage;
+          return CustomLineChartPage(chartTitle: '${widget.cardTitle} Overview');
         }));
       },
       child: SizedBox(
         height: 300,
         width: double.infinity,
         child: Card(
-          elevation: 2.0,
+          shadowColor: Theme.of(context).colorScheme.primary,
+          elevation: 3.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -32,37 +36,18 @@ class WaterMainCard extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                Text(cardTitle,
+                Text(widget.cardTitle,
                     style: TextStyle(
                         fontSize: 23,
                         // color: Colors.white,
                         fontWeight: FontWeight.bold)),
-                Icon(
-                  Icons.water_drop,
-                  size: 150,
-                ),
-                Text('Sample Text')
+                SizedBox(height: 219, child: RadialGauge(level: 0)),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-}
-
-//Include in Pump control Page**
-// Text(
-//                   'Pump Control',
-//                   style: Theme.of(context).textTheme.titleMedium,
-//                 ),
-
-class WaterParameterCard extends StatelessWidget {
-  const WaterParameterCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
 
@@ -84,12 +69,13 @@ class ParameterListCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return UnderConstruction();
+          return CustomLineChartPage(chartTitle: '$parameter Overview');
         }));
       },
       child: SizedBox(
           width: double.infinity,
           child: Card(
+            shadowColor: Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
@@ -113,72 +99,3 @@ class ParameterListCard extends StatelessWidget {
 }
 // Card => End
 
-//Pages => Start
-class PumpControlPage extends StatelessWidget {
-  const PumpControlPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.build,
-              size: 50,
-            ),
-            Text('This page is still under construction'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-//To be renamed Trends Page
-class UnderConstruction extends StatelessWidget {
-  const UnderConstruction({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trends Page'),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.build,
-                size: 50,
-              ),
-              Text('This page is still under construction'),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-// Pages => End
-
-
-// Row(
-//                 children: [
-//                   displayIcon,
-//                   Text(
-//                     'pH',
-//                     style: Theme.of(context).textTheme.titleSmall,
-//                   ),
-//                   SizedBox(
-//                     width: 260,
-//                   ),
-//                   Text(
-//                     'value',
-//                     style: Theme.of(context).textTheme.titleSmall,
-//                   )
-//                 ],
-//               ),
