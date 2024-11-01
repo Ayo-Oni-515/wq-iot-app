@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wqm_app/charts.dart';
 
 //Pages => Start
 class WaterParameterListPage extends StatelessWidget {
@@ -110,24 +109,25 @@ class PumpControlPage extends StatelessWidget {
   }
 }
 
-class CustomLineChartPage extends StatelessWidget {
-  final String chartTitle;
-  const CustomLineChartPage({super.key, required this.chartTitle});
+//To be implemented in later updates
+// class CustomLineChartPage extends StatelessWidget {
+//   final String chartTitle;
+//   const CustomLineChartPage({super.key, required this.chartTitle});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          chartTitle,
-          maxLines: 2,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-      ),
-      body: CustomLineChart(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(
+//           chartTitle,
+//           maxLines: 2,
+//           style: Theme.of(context).textTheme.titleMedium,
+//         ),
+//       ),
+//       body: Expanded(child: CustomLineChart()),
+//     );
+//   }
+// }
 
 //Under construction widget
 class UnderConstruction extends StatelessWidget {

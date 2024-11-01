@@ -72,13 +72,13 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              WaterMainCard(
+              MainCard(
                 cardTitle: 'WQI',
               ),
               SizedBox(
                 height: 10,
               ),
-              WaterMainCard(
+              MainCard(
                 cardTitle: 'Water Level',
               ),
               //Water Level Chart: Use Liquid Progress Indicator
@@ -93,30 +93,32 @@ class _HomePageState extends State<HomePage> {
               //Parameter 1
               ParameterListCard(
                 parameter: 'pH',
-                parameterValue: 7.1,
+                parameterValue: 7.1, //Add raspi-vaule
                 displayIcon: 'assets/icons/ph_icon.png',
               ),
               ParameterListCard(
                 parameter: 'Temperature',
-                parameterValue: 25,
+                parameterValue: 25, //Add raspi-vaule
                 displayIcon: 'assets/icons/temperature_icon.png',
                 unit: '°C',
               ),
               ParameterListCard(
                 parameter: 'Turbidity',
-                parameterValue: 20,
+                parameterValue: 20, //Add raspi-vaule
                 displayIcon: 'assets/icons/turbidity_icon.png',
                 unit: 'NTU',
               ),
               ParameterListCard(
                 parameter: 'Total Dissolved Solids',
-                parameterValue: 7.1,
+                parameterValue: 500, //Add raspi-vaule
                 displayIcon: 'assets/icons/tds_icon.png',
+                unit: 'ppm',
               ),
               ParameterListCard(
                 parameter: 'Electrical Conductivity',
-                parameterValue: 7.1,
+                parameterValue: 1000, //Add raspi-vaule
                 displayIcon: 'assets/icons/ec_icon.png',
+                unit: 'µS/cm',
               ),
               //Add colour change to the "view more..." text
               GestureDetector(
@@ -128,12 +130,12 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: const Text(
                   'view more...',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 76, 163, 234),
+                    fontSize: 16,
+                  ),
                 ),
               ),
-
-              // SizedBox(
-              //   height: 5,
-              // ),
             ],
           ),
         ),

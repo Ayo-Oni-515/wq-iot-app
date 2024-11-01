@@ -30,7 +30,7 @@ class WqmHome extends StatelessWidget {
             fontSize: 23,
           ),
           titleSmall: TextStyle(
-            fontSize: 16,
+            fontSize: 18,
           ),
         )),
       ),
