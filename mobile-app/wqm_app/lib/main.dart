@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart'; //Imports Material Design.
+import 'package:provider/provider.dart';
+import 'package:wqm_app/state_manager.dart';
 import 'package:wqm_app/wqm_home.dart'; //Imports the Home Page of the WQM App.
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts.
 
@@ -12,30 +14,31 @@ class WqmHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'WQM App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Color.fromRGBO(227, 242, 253, 1),
-          primary: Color.fromRGBO(38, 155, 255, 1),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WQMProvider()),
+        ChangeNotifierProvider(create: (context) => PumpModeProvider())
+      ],
+      child: MaterialApp(
+        title: 'WQM App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Color.fromRGBO(227, 242, 253, 1),
+            primary: Color.fromRGBO(38, 155, 255, 1),
+          ),
+          useMaterial3: true,
+          textTheme: GoogleFonts.latoTextTheme(const TextTheme(
+            titleMedium: TextStyle(
+              fontSize: 23,
+            ),
+            titleSmall: TextStyle(
+              fontSize: 18,
+            ),
+          )),
         ),
-        useMaterial3: true,
-        textTheme: GoogleFonts.latoTextTheme(const TextTheme(
-          titleLarge: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
-          // color: Color.fromRGBO(45, 62, 78, 1)),
-          titleMedium: TextStyle(
-            fontSize: 23,
-          ),
-          titleSmall: TextStyle(
-            fontSize: 18,
-          ),
-        )),
+        debugShowCheckedModeBanner: false,
+        home: WqmHomeState(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: WqmHomeState(),
     );
   }
 }

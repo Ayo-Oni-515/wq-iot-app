@@ -10,17 +10,16 @@ control, and so on.
 #Importing Python Packages
 import time
 
-
 # Importing Raspberry pi packages
 # import RPi.GPIO as GPIO
-# import spidev
+# import spidev #(For SPI) already imported in the sensors package
+# import smbus #(For I2C)
 
 
 #Importing Essential Packages
-from constants import *
-from sensors import *
-from control import *
-from errors import *
+# from sensors import *
+# from control import *
+# from errors import *
 
 
 #GPIO cleanup from previous state (Automatically resets the GPIO Pins before startup)
@@ -32,11 +31,11 @@ from errors import *
 
 
 #SENSORS GPIO Initialization
-# GPIO.setup(EC_GPIO, GPIO.IN) (Not needed)
-# GPIO.setup(PH_GPIO, GPIO.IN)
-# GPIO.setup(TDS_GPIO, GPIO.IN)
-# GPIO.setup(TEMPERATURE_GPIO, GPIO.IN)
-# GPIO.setup(TURBIDITY_GPIO, GPIO.IN)
+# GPIO.setup(EC_GPIO_PIN, GPIO.IN) (Not needed)
+# GPIO.setup(PH_GPIO_PIN, GPIO.IN)
+# GPIO.setup(TDS_GPIO_PIN, GPIO.IN)
+# GPIO.setup(TEMPERATURE_GPIO_PIN, GPIO.IN)
+# GPIO.setup(TURBIDITY_GPIO_PIN, GPIO.IN)
 
 
 #Intefacing should be done using SPI 
@@ -52,3 +51,5 @@ from errors import *
 
 
 # GPIO.cleanup()
+time.sleep(5)
+print('My name is ayodeji')

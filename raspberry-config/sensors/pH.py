@@ -31,45 +31,23 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 Note: Final Reading requires stabilization
 """
 
-def ph_post(channel, args):
-    '''
-    Meant to perform Power On Self Test (POST)
-    '''
-    status = 0
-    return status
+from sensor import Analog_Sensor
+from sensor_constants import PH_MCP3008_ADC_PIN
+
+class PH_Sensor(Analog_Sensor):
+    def __init__(self, bus=0, device=0, max_speed=1350000, channel=PH_MCP3008_ADC_PIN):
+        super().__init__(bus, device, max_speed, channel)
 
 
-def ph(args):
-    pass
+    def ph_post(self):
+        '''
+        Meant to perform Power On Self Test (POST)
+        '''
+        pass
 
 
+    def ph_calculation(self):
+        adc_value = self.read_adc()
 
 
-# import spidev
-# import time
-
-# # SPI setup
-# spi = spidev.SpiDev()
-# spi.open(0, 0)  # Open on bus 0, device 0
-# spi.max_speed_hz = 1350000
-
-# def read_adc(channel):
-#     adc = spi.xfer2([1, (8 + channel) << 4, 0])
-#     data = ((adc[1] & 3) << 8) + adc[2]
-#     return data
-
-# def calculate_voltage(adc_value):
-#     return adc_value * (3.3 / 1023.0)  # For 3.3V reference
-
-# def calculate_turbidity(voltage):
-#     # Example linear approximation
-#     # You may need to adjust these based on calibration data
-#     return 3000 - (voltage * 1000)
-
-# while True:
-#     adc_value = read_adc(0)  # Channel 0 for turbidity sensor
-#     voltage = calculate_voltage(adc_value)
-#     turbidity = calculate_turbidity(voltage)
-    
-#     print(f"Turbidity: {turbidity} NTU")
-#     time.sleep(1)
+ph = PH_Sensor()

@@ -1,18 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:wqm_app/cards.dart';
+import 'package:wqm_app/charts.dart';
 
 //Pages => Start
-class WaterParameterListPage extends StatelessWidget {
-  const WaterParameterListPage({super.key});
+class NotificationsCentrePage extends StatefulWidget {
+  const NotificationsCentrePage({super.key});
+
+  @override
+  State<NotificationsCentrePage> createState() =>
+      _NotificationsCentrePageState();
+}
+
+class _NotificationsCentrePageState extends State<NotificationsCentrePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Notifications',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ),
+    );
+  }
+}
+
+class ParameterListPageModel {
+  final String parameter;
+  final double parameterValue;
+  final String displayIcon;
+  final String unit;
+
+  ParameterListPageModel({
+    required this.parameter,
+    required this.parameterValue,
+    this.displayIcon = 'assets/icons/default_icon.png',
+    this.unit = '',
+  });
+}
+
+class ParameterListData {
+  final List<ParameterListPageModel> parameterData = [
+    ParameterListPageModel(
+        parameter: 'pH',
+        parameterValue: 7.1, //Add raspi-value
+        displayIcon: 'assets/icons/ph_icon.png',
+        unit: ''),
+    ParameterListPageModel(
+        parameter: 'Temperature',
+        parameterValue: 25, //Add raspi-value
+        displayIcon: 'assets/icons/temperature_icon.png',
+        unit: '°C'),
+    ParameterListPageModel(
+        parameter: 'Turbidity',
+        parameterValue: 20, //Add raspi-value
+        displayIcon: 'assets/icons/turbidity_icon.png',
+        unit: 'NTU'),
+    ParameterListPageModel(
+        parameter: 'Total Dissolved Solids',
+        parameterValue: 500, //Add raspi-value
+        displayIcon: 'assets/icons/tds_icon.png',
+        unit: 'ppm'),
+    ParameterListPageModel(
+        parameter: 'Electrical Conductivity',
+        parameterValue: 1000, //Add raspi-value
+        displayIcon: 'assets/icons/ec_icon.png',
+        unit: 'µS/cm'),
+    ParameterListPageModel(
+        parameter: 'Hardness',
+        parameterValue: 100, //Add raspi-value
+        displayIcon: 'assets/icons/default_icon.png',
+        unit: 'ppm'),
+    ParameterListPageModel(
+        parameter: 'Salinity',
+        parameterValue: 300, //Add raspi-value
+        displayIcon: 'assets/icons/default_icon.png',
+        unit: 'ppt'),
+    ParameterListPageModel(
+        parameter: 'Dissolved Oxygen',
+        parameterValue: 100, //Add raspi-value
+        displayIcon: 'assets/icons/default_icon.png',
+        unit: 'mg/L'),
+  ];
+}
+
+class ParameterListPage extends StatelessWidget {
+  const ParameterListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<String> icons = [
-      'assets/icons/ph_icon.png',
-      'assets/icons/temperature_icon.png',
-      'assets/icons/turbidity_icon.png',
-      'assets/icons/tds_icon.png',
-      'assets/icons/ec_icon.png'
-    ];
+    final data = ParameterListData();
 
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +101,7 @@ class WaterParameterListPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
-            itemCount: icons.length,
+            itemCount: data.parameterData.length,
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -35,7 +112,8 @@ class WaterParameterListPage extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return UnderConstruction();
+                    return CustomLineChartPage(
+                        chartTitle: data.parameterData[index].parameter);
                   }));
                 },
                 child: Container(
@@ -50,18 +128,23 @@ class WaterParameterListPage extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 22,
-                        backgroundImage: AssetImage(icons[index]),
+                        backgroundImage:
+                            AssetImage(data.parameterData[index].displayIcon),
                       ),
                       Text(
-                        'pH',
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                      ),
-                      Text(
-                        '7.1',
+                        data.parameterData[index].parameter,
+                        // maxLines: ,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '${data.parameterData[index].parameterValue} ${data.parameterData[index].unit}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                     ],
                   ),
@@ -80,27 +163,22 @@ class PumpControlPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Card(
-                elevation: 4.0,
-                shadowColor: Theme.of(context).colorScheme.primary,
-                child: Padding(
-                  padding: EdgeInsets.all(50),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.build,
-                        size: 50,
-                      ),
-                      Text('Pump Control'),
-                      Text('This page is still under construction'),
-                    ],
-                  ),
-                ),
-              )
+              SizedBox(
+                height: 10,
+              ),
+              PumpActivityCard(),
+              SizedBox(
+                height: 10,
+              ),
+              PumpControlModeCard(),
+              SizedBox(
+                height: 10,
+              ),
+              PumpSwitchCard()
             ],
           ),
         ),
@@ -109,25 +187,40 @@ class PumpControlPage extends StatelessWidget {
   }
 }
 
-//To be implemented in later updates
-// class CustomLineChartPage extends StatelessWidget {
-//   final String chartTitle;
-//   const CustomLineChartPage({super.key, required this.chartTitle});
+class CustomLineChartPage extends StatelessWidget {
+  final String chartTitle;
+  const CustomLineChartPage({super.key, required this.chartTitle});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           chartTitle,
-//           maxLines: 2,
-//           style: Theme.of(context).textTheme.titleMedium,
-//         ),
-//       ),
-//       body: Expanded(child: CustomLineChart()),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '$chartTitle Overview',
+          maxLines: 2,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 600,
+              child: LinearChart(
+                chartHeader: chartTitle,
+              ),
+            ),
+            Spacer(
+              flex: 1,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 //Under construction widget
 class UnderConstruction extends StatelessWidget {
@@ -151,7 +244,7 @@ class UnderConstruction extends StatelessWidget {
                 Icons.build,
                 size: 50,
               ),
-              Text('This page is still under construction'),
+              Text('Coming Soon!!!'),
             ],
           ),
         ),

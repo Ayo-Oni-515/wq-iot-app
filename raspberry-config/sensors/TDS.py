@@ -26,16 +26,25 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 **Requires ADC(MCP3008) -> 10-bit 
 """
 
-def tds_post(args):
-    '''
-    Meant to perform Power On Self Test (POST)
-    '''
-    pass
+from sensor import Analog_Sensor
+from sensor_constants import TDS_MCP3008_ADC_PIN
 
-def tds(args):
-    pass
+class TDS_Sensor(Analog_Sensor):
+    def __init__(self, bus=0, device=0, max_speed=1350000, channel=TDS_MCP3008_ADC_PIN):
+        super().__init__(bus, device, max_speed, channel)
+
+    def tds_post(self):
+        '''
+        Meant to perform Power On Self Test (POST)
+        '''
+        pass
 
 
+    def tds_calculation(self):
+        adc_value = self.read_adc()
+
+
+tds = TDS_Sensor()
 
 
 # import spidev

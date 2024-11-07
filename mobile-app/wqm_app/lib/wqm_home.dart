@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wqm_app/charts.dart';
 import 'package:wqm_app/pages.dart';
 import 'cards.dart';
 
@@ -20,31 +21,46 @@ class _WqmHomeStateState extends State<WqmHomeState> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          // centerTitle: true,
-          leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+          //To be implemented in later versions
+          // leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
 
           title: Text(
             'WQM App',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.sync))
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return NotificationsCentrePage(); //NotificationsCentrePage
+                  }));
+                },
+                icon: const Icon(Icons.notifications))
           ],
         ),
         body: IndexedStack(
           index: currentScreen,
           children: screens,
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              //Handles App Synchronization with Raspberry Pi.
+            });
+          },
+          child: Icon(Icons.sync),
+        ),
         bottomNavigationBar: BottomNavigationBar(
             onTap: (value) {
               setState(() {
+                //Handles Screen Navigation.
                 currentScreen = value;
               });
             },
             currentIndex: currentScreen,
             iconSize: 30,
-            selectedFontSize: 12,
+            selectedFontSize: 13,
             unselectedFontSize: 10,
             items: const [
               BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
@@ -74,12 +90,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               MainCard(
                 cardTitle: 'WQI',
+                chartType: RadialGauge(level: 90), //Add raspi_value
               ),
               SizedBox(
                 height: 10,
               ),
               MainCard(
                 cardTitle: 'Water Level',
+                chartType: RadialProgressBar(level: 50.0), //Add raspi_value
               ),
               //Water Level Chart: Use Liquid Progress Indicator
               SizedBox(
@@ -90,52 +108,70 @@ class _HomePageState extends State<HomePage> {
                 'Parameters',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
+              SizedBox(
+                height: 4,
+              ),
               //Parameter 1
               ParameterListCard(
                 parameter: 'pH',
                 parameterValue: 7.1, //Add raspi-vaule
                 displayIcon: 'assets/icons/ph_icon.png',
               ),
+              SizedBox(
+                height: 4,
+              ),
+              //Parameter 2
               ParameterListCard(
                 parameter: 'Temperature',
                 parameterValue: 25, //Add raspi-vaule
                 displayIcon: 'assets/icons/temperature_icon.png',
                 unit: '°C',
               ),
+              SizedBox(
+                height: 4,
+              ),
+              //Parameter 3
               ParameterListCard(
                 parameter: 'Turbidity',
                 parameterValue: 20, //Add raspi-vaule
                 displayIcon: 'assets/icons/turbidity_icon.png',
                 unit: 'NTU',
               ),
+              SizedBox(
+                height: 4,
+              ),
+              //Parameter 4
               ParameterListCard(
                 parameter: 'Total Dissolved Solids',
                 parameterValue: 500, //Add raspi-vaule
                 displayIcon: 'assets/icons/tds_icon.png',
                 unit: 'ppm',
               ),
+              SizedBox(
+                height: 4,
+              ),
+              //Parameter 5
               ParameterListCard(
                 parameter: 'Electrical Conductivity',
                 parameterValue: 1000, //Add raspi-vaule
                 displayIcon: 'assets/icons/ec_icon.png',
                 unit: 'µS/cm',
               ),
-              //Add colour change to the "view more..." text
-              GestureDetector(
-                onTap: () {
+              TextButton(
+                onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return WaterParameterListPage();
+                    return ParameterListPage();
                   }));
                 },
-                child: const Text(
+                child: Text(
                   'view more...',
                   style: TextStyle(
                     color: Color.fromARGB(255, 76, 163, 234),
                     fontSize: 16,
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),

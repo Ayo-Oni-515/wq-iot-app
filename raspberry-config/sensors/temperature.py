@@ -29,16 +29,27 @@ Interfacing Protocol: 1-Wire Protocol.
 
 **Enable the 1-wire protocol.
 """
+from sensor import Digital_Sensor
+from sensor_constants import * #Check Later.
 
-def temperature_post(args):
-    '''
-    Meant to perform Power On Self Test (POST)
-    '''
-    pass
+class Temperature_Sensor:
+    def __init__(self) -> None:
+        pass
+    
+
+    def temperature_post(args):
+        '''
+        Meant to perform Power On Self Test (POST)
+        '''
+        pass
 
 
-def temperature(args):
-    pass
+    def temperature(args):
+        pass
+
+
+
+
 
 
 
