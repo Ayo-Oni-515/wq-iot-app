@@ -165,21 +165,30 @@ class PumpControlPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              PumpActivityCard(),
-              SizedBox(
-                height: 10,
-              ),
-              PumpControlModeCard(),
-              SizedBox(
-                height: 10,
-              ),
-              PumpSwitchCard()
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                MainCard(
+                  cardTitle: 'Water Level',
+                  chartType: RadialProgressBar(level: 50.0), //Add raspi_value
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                PumpActivityCard(),
+                SizedBox(
+                  height: 10,
+                ),
+                PumpControlModeCard(),
+                SizedBox(
+                  height: 10,
+                ),
+                PumpSwitchCard()
+              ],
+            ),
           ),
         ),
       ),

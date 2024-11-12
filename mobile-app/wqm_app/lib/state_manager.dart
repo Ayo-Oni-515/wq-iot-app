@@ -13,9 +13,25 @@ class PumpModeProvider extends ChangeNotifier {
       {this.modeColor = const Color.fromRGBO(38, 155, 255, 1),
       this.modeState = 'Auto'});
 
-  void changeHandler({required Color newColor, required String newMode}) async {
+  void changeHandler({required Color newColor, required String newMode}) {
     modeColor = newColor;
     modeState = newMode;
+    notifyListeners();
+  }
+}
+
+class PumpSwitchProvider extends ChangeNotifier {
+  Color statusColor;
+  String statusState;
+
+  PumpSwitchProvider({
+    this.statusColor = const Color.fromRGBO(247, 46, 46, 1),
+    this.statusState = 'Stopped',
+  });
+
+  void changeHandler({required Color newColor, required String newMode}) {
+    statusColor = newColor;
+    statusState = newMode;
     notifyListeners();
   }
 }

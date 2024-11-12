@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; //Imports Material Design.
-import 'package:provider/provider.dart';
-import 'package:wqm_app/state_manager.dart';
+import 'package:provider/provider.dart'; //Imports the State Manager
+import 'package:wqm_app/state_manager.dart'; //Imports Custom State Management Utility
 import 'package:wqm_app/wqm_home.dart'; //Imports the Home Page of the WQM App.
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts.
 
@@ -17,7 +17,8 @@ class WqmHome extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => WQMProvider()),
-        ChangeNotifierProvider(create: (context) => PumpModeProvider())
+        ChangeNotifierProvider(create: (context) => PumpModeProvider()),
+        ChangeNotifierProvider(create: (context) => PumpSwitchProvider())
       ],
       child: MaterialApp(
         title: 'WQM App',
