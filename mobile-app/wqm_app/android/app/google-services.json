@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "163863376715",
+    "project_id": "wqm-app-49775",
+    "storage_bucket": "wqm-app-49775.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163863376715:android:263ff66bd7c805760c2ece",
+        "android_client_info": {
+          "package_name": "com.example.wqm_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdo32VnsdsMXzb7Q5CXukgmOsNIAgqWVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

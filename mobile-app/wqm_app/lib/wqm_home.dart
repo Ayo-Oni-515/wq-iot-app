@@ -90,13 +90,8 @@ class _HomePageState extends State<HomePage> {
             children: [
               MainCard(
                 cardTitle: 'WQI',
-                chartType: RadialGauge(level: 90), //Add raspi_value
+                chartType: RadialGauge(level: 50), //Add raspi_value
               ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              
-              //Water Level Chart: Use Liquid Progress Indicator
               SizedBox(
                 height: 30,
               ),

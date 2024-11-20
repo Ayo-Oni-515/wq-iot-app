@@ -16,7 +16,7 @@ Unit: Meters (m)
 
 Conversion Factor:
 
-Measuring Range: 25 ~ 4m.
+Measuring Range: 25cm ~ 4m.
 
 Detecting Angle: 75°
 

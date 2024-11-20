@@ -25,8 +25,8 @@ class PumpSwitchProvider extends ChangeNotifier {
   String statusState;
 
   PumpSwitchProvider({
-    this.statusColor = const Color.fromRGBO(247, 46, 46, 1),
-    this.statusState = 'Stopped',
+    this.statusColor = const Color.fromRGBO(38, 155, 255, 1),
+    this.statusState = 'Raspi-Override',
   });
 
   void changeHandler({required Color newColor, required String newMode}) {

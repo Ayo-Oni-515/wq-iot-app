@@ -21,6 +21,20 @@ class _NotificationsCentrePageState extends State<NotificationsCentrePage> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.build,
+                size: 50,
+              ),
+              Text('Coming Soon!!!'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -99,7 +113,7 @@ class ParameterListPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: GridView.builder(
             itemCount: data.parameterData.length,
             shrinkWrap: true,
@@ -171,6 +185,7 @@ class PumpControlPage extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
+                //Water Level Chart: Use Liquid Progress Indicator
                 MainCard(
                   cardTitle: 'Water Level',
                   chartType: RadialProgressBar(level: 50.0), //Add raspi_value

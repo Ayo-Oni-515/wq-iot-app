@@ -45,10 +45,8 @@ class _WaterMainCardState extends State<MainCard> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(widget.cardTitle,
-                    style: TextStyle(
-                        fontSize: 23,
-                        // color: Colors.white,
-                        fontWeight: FontWeight.bold)),
+                    style:
+                        TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
                 SizedBox(
                     height: 219, child: widget.chartType), //Add raspi-vaule
               ],
@@ -146,14 +144,12 @@ class _PumpActivityCardState extends State<PumpActivityCard> {
                   _indicator(
                       'Control Status',
                       context.watch<PumpSwitchProvider>().statusColor,
-                      context
-                          .watch<PumpSwitchProvider>()
-                          .statusState), // or Stopped
+                      context.watch<PumpSwitchProvider>().statusState),
                   _indicator(
                     'Mode',
                     context.watch<PumpModeProvider>().modeColor,
                     context.watch<PumpModeProvider>().modeState,
-                  ) // or Manual
+                  )
                 ],
               )
             ],
@@ -209,44 +205,16 @@ class PumpControlModeCard extends StatefulWidget {
 
 class _PumpControlModeState extends State<PumpControlModeCard> {
   String selectedMode = 'Auto';
-  bool confirmMode = false;
-  // String modeState = 'Auto';
   void pickColor() {
     if (selectedMode == 'Auto') {
       Provider.of<PumpModeProvider>(context, listen: false).changeHandler(
           newColor: Color.fromRGBO(38, 155, 255, 1), newMode: selectedMode);
+      Provider.of<PumpSwitchProvider>(context, listen: false).changeHandler(
+          newColor: Color.fromRGBO(38, 155, 255, 1), newMode: 'Raspi-Override');
     } else if (selectedMode == 'Manual') {
       Provider.of<PumpModeProvider>(context, listen: false).changeHandler(
           newColor: Color.fromRGBO(255, 155, 2, 1), newMode: selectedMode);
     }
-  }
-
-  Future<void> dialog() async {
-    await showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Pump Control Mode',
-                style: Theme.of(context).textTheme.titleMedium),
-            content: const Text(
-                'Are you sure you want to manually control the pump?'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    confirmMode = false;
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('No')),
-              TextButton(
-                  onPressed: () {
-                    confirmMode = true;
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Yes'))
-            ],
-          );
-        });
   }
 
   @override
@@ -283,13 +251,35 @@ class _PumpControlModeState extends State<PumpControlModeCard> {
                     selected: {selectedMode},
                     onSelectionChanged: (Set<String> selection) {
                       setState(() {
-                        // dialog();
-                        // if (confirmMode) {
-
-                        // }
-                        selectedMode = selection.first;
-                        pickColor();
-                        // confirmMode = false;
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Pump Control Mode',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium),
+                                content: const Text(
+                                    'Are you sure you want to change the pump\'s control mode?'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('No')),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        setState(() {
+                                          selectedMode = selection.first;
+                                          pickColor();
+                                        });
+                                      },
+                                      child: Text('Yes'))
+                                ],
+                              );
+                            });
                       });
                     },
                   ),
@@ -314,15 +304,9 @@ class _PumpSwitchCardState extends State<PumpSwitchCard> {
   bool isOn = false;
 
   void switchState() {
-    if (isOn == true) {
-      setState(() {
-        isOn = !isOn;
-      });
-    } else if (isOn == false) {
-      setState(() {
-        isOn = !isOn;
-      });
-    }
+    setState(() {
+      isOn = !isOn;
+    });
   }
 
   void pickColor(String mode) {
@@ -330,16 +314,27 @@ class _PumpSwitchCardState extends State<PumpSwitchCard> {
       if (isOn == true) {
         Provider.of<PumpSwitchProvider>(context, listen: false).changeHandler(
             newColor: Color.fromRGBO(7, 250, 27, 1), newMode: 'Running');
-      } else if (isOn == false) {
+      } else {
         Provider.of<PumpSwitchProvider>(context, listen: false).changeHandler(
             newColor: Color.fromRGBO(247, 46, 46, 1), newMode: 'Stopped');
       }
     }
   }
 
+  void reset() {
+    setState(() {
+      isOn = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic providerMode = context.watch<PumpModeProvider>().modeState;
+
+    if (providerMode == 'Auto' && isOn) {
+      reset();
+    }
+
     return SizedBox(
       height: 170,
       width: double.infinity,
@@ -373,7 +368,7 @@ class _PumpSwitchCardState extends State<PumpSwitchCard> {
                   Switch(
                     value: isOn,
                     onChanged: providerMode == 'Auto'
-                        ? null
+                        ? (context) => reset()
                         : (context) {
                             switchState();
                             pickColor(providerMode);
@@ -395,12 +390,3 @@ class _PumpSwitchCardState extends State<PumpSwitchCard> {
   }
 }
 // Card => End
-
-// setState(() {
-//                         selectedMode = selection.first;
-//                         if (selectedMode == 'Manual') {
-//                           
-//                               });
-//                         }
-//                       });
-//                       pickColor();
