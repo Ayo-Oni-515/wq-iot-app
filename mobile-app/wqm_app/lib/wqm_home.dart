@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wqm_app/charts.dart';
 import 'package:wqm_app/pages.dart';
+import 'package:wqm_app/signup_page.dart';
 import 'cards.dart';
 
 // This is the home dart file for the flutter app.
@@ -17,6 +19,15 @@ class _WqmHomeStateState extends State<WqmHomeState> {
 
   List<Widget> screens = [HomePage(), PumpControlPage()];
 
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const SignupPage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +39,7 @@ class _WqmHomeStateState extends State<WqmHomeState> {
             'WQM App',
             style: Theme.of(context).textTheme.titleMedium,
           ),
+          automaticallyImplyLeading: false, // Hide the back button
           actions: [
             IconButton(
                 onPressed: () {
@@ -36,7 +48,22 @@ class _WqmHomeStateState extends State<WqmHomeState> {
                     return NotificationsCentrePage(); //NotificationsCentrePage
                   }));
                 },
-                icon: const Icon(Icons.notifications))
+                icon: const Icon(Icons.notifications)),
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'Logout') logout();
+              },
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                      value: 'Logout',
+                      child: Text(
+                        'Logout',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      )),
+                ];
+              },
+            ),
           ],
         ),
         body: IndexedStack(
@@ -44,7 +71,7 @@ class _WqmHomeStateState extends State<WqmHomeState> {
           children: screens,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
+          onPressed: () async {
             setState(() {
               //Handles App Synchronization with Raspberry Pi.
             });
