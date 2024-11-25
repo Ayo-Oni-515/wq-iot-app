@@ -1,16 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:wqm_app/signup_page.dart';
-import 'package:wqm_app/wqm_home.dart';
+import 'package:wqm_app/pages/login_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final emailFieldController = TextEditingController();
   final passwordFieldController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -22,36 +21,29 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Future<void> loginUserWithEmailAndPassword() async {
+  Future<void> createUserWithEmailAndInstance() async {
     try {
       // ignore: unused_local_variable
       final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
+          .createUserWithEmailAndPassword(
               email: emailFieldController.text.trim(),
               password: passwordFieldController.text.trim());
-      // debugPrint(userCredential as String);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(
-                  'Logged in as\n${FirebaseAuth.instance.currentUser!.email}')),
+              content:
+                  Text('Account created successfully,\nproceed to sign in.')),
         );
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const WqmHomeState()));
       }
+      // debugPrint(userCredential as String);
     } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message.toString())),
-        );
-      }
+      debugPrint(e.message);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -60,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Sign In',
+                'Sign Up',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
@@ -85,12 +77,12 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await loginUserWithEmailAndPassword();
+                  await createUserWithEmailAndInstance();
                   emailFieldController.clear();
                   passwordFieldController.clear();
                 },
                 child: const Text(
-                  'SIGN IN',
+                  'SIGN UP',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -102,16 +94,16 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return SignupPage();
+                    return LoginPage();
                   }));
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: 'Don\'t have an account? ',
+                    text: 'Already have an account? ',
                     style: Theme.of(context).textTheme.titleSmall,
                     children: [
                       TextSpan(
-                        text: 'Sign Up',
+                        text: 'Sign In',
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),

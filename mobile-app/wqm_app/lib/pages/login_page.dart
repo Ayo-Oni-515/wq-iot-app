@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:wqm_app/login_page.dart';
+import 'package:wqm_app/pages/signup_page.dart';
+import 'package:wqm_app/pages/wqm_home.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _LoginPageState extends State<LoginPage> {
   final emailFieldController = TextEditingController();
   final passwordFieldController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -21,29 +22,36 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
-  Future<void> createUserWithEmailAndInstance() async {
+  Future<void> loginUserWithEmailAndPassword() async {
     try {
       // ignore: unused_local_variable
       final userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
+          .signInWithEmailAndPassword(
               email: emailFieldController.text.trim(),
               password: passwordFieldController.text.trim());
+      // debugPrint(userCredential as String);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content:
-                  Text('Account created successfully,\nproceed to sign in.')),
+              content: Text(
+                  'Logged in as\n${FirebaseAuth.instance.currentUser!.email}')),
+        );
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const WqmHomeState()));
+      }
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message.toString())),
         );
       }
-      // debugPrint(userCredential as String);
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.message);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -52,7 +60,7 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Sign Up',
+                'Sign In',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
@@ -77,12 +85,12 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  await createUserWithEmailAndInstance();
+                  await loginUserWithEmailAndPassword();
                   emailFieldController.clear();
                   passwordFieldController.clear();
                 },
                 child: const Text(
-                  'SIGN UP',
+                  'SIGN IN',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
@@ -94,16 +102,16 @@ class _SignupPageState extends State<SignupPage> {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return LoginPage();
+                    return SignupPage();
                   }));
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: 'Already have an account? ',
+                    text: 'Don\'t have an account? ',
                     style: Theme.of(context).textTheme.titleSmall,
                     children: [
                       TextSpan(
-                        text: 'Sign In',
+                        text: 'Sign Up',
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),

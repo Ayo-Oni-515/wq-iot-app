@@ -1,12 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart'; //Imports Firebase Authentication
-import 'package:firebase_core/firebase_core.dart'; //Imports Firebase
-import 'package:flutter/material.dart'; //Imports Material Design.
-import 'package:provider/provider.dart'; //Imports the State Manager
+import 'package:firebase_auth/firebase_auth.dart'; 
+import 'package:firebase_core/firebase_core.dart'; 
+import 'package:flutter/material.dart'; 
+import 'package:provider/provider.dart'; 
 import 'package:wqm_app/firebase_options.dart';
-import 'package:wqm_app/signup_page.dart'; //Imports the Sign up page
-import 'package:wqm_app/state_manager.dart'; //Imports Custom State Management Utility
-import 'package:wqm_app/wqm_home.dart'; //Imports the Home Page of the WQM App.
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts.
+import 'package:wqm_app/pages/signup_page.dart'; 
+import 'package:wqm_app/state_manager.dart'; 
+import 'package:wqm_app/pages/wqm_home.dart'; 
+import 'package:google_fonts/google_fonts.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
