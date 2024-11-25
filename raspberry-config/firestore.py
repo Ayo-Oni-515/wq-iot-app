@@ -11,7 +11,14 @@ db = firestore.client()
 # Add data
 doc_ref = db.collection("waterParameters").document("ko9ATHykCZnw3RxkVzpP")
 doc_ref.update({
-    "temperature": 23.5,
+    "do": 15,
+    "ec": 700,
+    "hardness": 200,
+    "ph": 7.4,
+    "salinity": 18,
+    "temperature": 25,
+    "turbidity": 3,
+    "wqi": 23.9,
 })
 
 # Read data
