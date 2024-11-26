@@ -21,7 +21,7 @@ class _LinearChartState extends State<LinearChart> {
         LineSeries<WaterQualityData, String>(
           name: widget.chartHeader,
           dataSource: getWaterQualityData(),
-          xValueMapper: (WaterQualityData data, _) => data.month,
+          xValueMapper: (WaterQualityData data, _) => data.timestamp.toString(),
           yValueMapper: (WaterQualityData data, _) => data.value,
           dataLabelSettings: DataLabelSettings(isVisible: true),
           markerSettings: MarkerSettings(isVisible: true),
@@ -33,24 +33,23 @@ class _LinearChartState extends State<LinearChart> {
 
 List<WaterQualityData> getWaterQualityData() {
   return [
-    WaterQualityData('Jan', 30),
-    WaterQualityData('Feb', 40),
-    WaterQualityData('Mar', 28),
-    WaterQualityData('Apr', 32),
-    WaterQualityData('May', 44),
-    WaterQualityData('Jun', 50),
-    WaterQualityData('Jul', 45),
-    WaterQualityData('Aug', 60),
-    WaterQualityData('Sept', 65),
-    WaterQualityData('Oct', 25),
-    WaterQualityData('Nov', 100),
-    WaterQualityData('Dec', 63),
+    WaterQualityData(DateTime.parse('2024-11-01T12:00:00Z'), 30),
+    WaterQualityData(DateTime.parse('2024-11-02T12:00:00Z'), 20),
+    WaterQualityData(DateTime.parse('2024-11-03T12:00:00Z'), 36),
+    WaterQualityData(DateTime.parse('2024-11-04T12:00:00Z'), 20),
+    WaterQualityData(DateTime.parse('2024-11-05T12:00:00Z'), 11),
+    WaterQualityData(DateTime.parse('2024-11-06T12:00:00Z'), 78),
+    WaterQualityData(DateTime.parse('2024-11-07T12:00:00Z'), 46),
+    WaterQualityData(DateTime.parse('2024-11-08T12:00:00Z'), 78),
+    WaterQualityData(DateTime.parse('2024-11-09T12:00:00Z'), 30),
+    WaterQualityData(DateTime.parse('2024-11-10T12:00:00Z'), 101),
+
   ];
 }
 
 class WaterQualityData {
-  WaterQualityData(this.month, this.value);
+  WaterQualityData(this.timestamp, this.value);
 
-  final String month;
+  final DateTime timestamp;
   final double value;
 }
