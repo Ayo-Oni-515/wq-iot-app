@@ -8,9 +8,9 @@ firebase_admin.initialize_app(cred)
 # Access Firestore
 db = firestore.client()
 
-# Add data
-doc_ref = db.collection("waterParameters").document("ko9ATHykCZnw3RxkVzpP")
-doc_ref.update({
+# Update data for water quality parameters
+water_parameters = db.collection("waterParameters").document("ko9ATHykCZnw3RxkVzpP")
+water_parameters.update({
     "do": 15,
     "ec": 600,
     "hardness": 250,
@@ -21,9 +21,14 @@ doc_ref.update({
     "wqi": 23.9,
 })
 
+pump_control = db.collection("pumpControl").document("fCgyfcht2wPkn1TJ05KE")
+pump_control.update({
+    "water level": 70.34,
+})
+
 # Read data
-doc = db.collection("pumpControl").document("fCgyfcht2wPkn1TJ05KE").get()
-if doc.exists:
-    print(f"Document data: {doc.to_dict()}")
+if pump_control.exists:
+    pump_control = pump_control.to_dict()
+    print(f"Document data: {pump_control['mode'], pump_control['switch']}")
 else:
     print("No such document!")
