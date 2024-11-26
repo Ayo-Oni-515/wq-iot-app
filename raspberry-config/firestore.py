@@ -30,6 +30,7 @@ pump_control.update({
 doc = pump_control.collection("pumpControl").document("fCgyfcht2wPkn1TJ05KE").get()
 if doc.exists:
     doc = doc.to_dict()
-    print(f"Document data: {doc['mode'], doc['switch']}")
+    # print(f"Document data: {doc['mode'], doc['switch']}")
+    print(doc)
 else:
     print("No such document!")
