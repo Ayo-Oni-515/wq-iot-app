@@ -293,7 +293,7 @@ class PumpControlPage extends StatelessWidget {
         }
         final pumpData = snapshot.data!;
         final pumpControl = pumpData.docs[0].data();
-        final raspiWaterLevel = pumpControl['water level'].toString();
+        final raspiWaterLevel = pumpControl['water_level'].toString();
         return Scaffold(
           body: SafeArea(
             child: Padding(
