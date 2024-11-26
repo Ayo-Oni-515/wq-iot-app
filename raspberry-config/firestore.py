@@ -32,7 +32,8 @@ try:
     doc = pump_control_ref.get()
     if doc.exists:
         pump_control_data = doc.to_dict()
-        print(f"Document data: {pump_control_data['mode'], pump_control_data['switch']}")
+        # print(f"Document data: {pump_control_data['mode'], pump_control_data['switch']}")
+        print(pump_control_data)
     else:
         print("No such document!")
 
