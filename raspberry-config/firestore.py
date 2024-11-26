@@ -25,7 +25,7 @@ try:
     # Update data for Water Level
     pump_control = db.collection("pumpControl").document("fCgyfcht2wPkn1TJ05KE")
     pump_control.update({
-        "water_level": 70.34,
+        "water_level": 70.50,
     })
 
     # Read pump control data
