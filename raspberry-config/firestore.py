@@ -22,7 +22,7 @@ doc_ref.update({
 })
 
 # Read data
-doc = db.collection("sensorData").document("sensor1").get()
+doc = db.collection("pumpControl").document("fCgyfcht2wPkn1TJ05KE").get()
 if doc.exists:
     print(f"Document data: {doc.to_dict()}")
 else:
