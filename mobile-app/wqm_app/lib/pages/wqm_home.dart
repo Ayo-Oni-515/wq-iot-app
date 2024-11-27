@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
 import 'package:wqm_app/cards/main_card.dart';
 import 'package:wqm_app/cards/parameter_list_card.dart';
 import 'package:wqm_app/cards/pump_activity_card.dart';
@@ -29,6 +28,7 @@ class _WqmHomeStateState extends State<WqmHomeState> {
 
   Future<void> logout() async {
     final currentUser = FirebaseAuth.instance.currentUser!.email;
+    //On logout reset pump switch & mode
     try {
       await FirebaseAuth.instance.signOut();
       await FirebaseFirestore.instance
@@ -49,28 +49,6 @@ class _WqmHomeStateState extends State<WqmHomeState> {
       if (mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Logout Failed!')));
-      }
-    }
-  }
-
-  Future raspiSync() async {
-    try {
-      final waterParameters =
-          await FirebaseFirestore.instance.collection("waterParameters").get();
-      final pumpControl =
-          await FirebaseFirestore.instance.collection("pumpControl").get();
-      // if (mounted) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(
-      //         content: Text(
-      //             'Synced with Raspberry Pi at: ${DateFormat('HH:mm:ss').format(DateTime.now())}')),
-      //   );
-      // }
-      return {'water parameters': waterParameters, 'pump control': pumpControl};
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Raspi Synchronization Failed.')));
       }
     }
   }
@@ -119,14 +97,6 @@ class _WqmHomeStateState extends State<WqmHomeState> {
           index: currentScreen,
           children: screens,
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     //Handles App Synchronization with Raspberry Pi.
-        //     // await raspiSync();
-        //     // setState(() {});
-        //   },
-        //   child: Icon(Icons.sync),
-        // ),
         bottomNavigationBar: BottomNavigationBar(
             onTap: (value) {
               setState(() {
@@ -190,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                     cardTitle: 'WQI',
                     chartType: RadialGauge(
                         level: double.parse(raspiWQI)), //Add raspi_value
+                    fireStoreEntry: 'wqi',
                   ),
                   SizedBox(
                     height: 30,
@@ -311,6 +282,7 @@ class PumpControlPage extends StatelessWidget {
                           //Radial Bar only responds to reloads.
                           level:
                               double.parse(raspiWaterLevel)), //Add raspi_value
+                      fireStoreEntry: 'water_level',
                     ),
                     SizedBox(
                       height: 10,

@@ -5,8 +5,13 @@ import 'package:wqm_app/pages/custom_line_chart_page.dart';
 class MainCard extends StatefulWidget {
   final String cardTitle;
   final Widget chartType;
+  final String fireStoreEntry;
 
-  const MainCard({super.key, required this.cardTitle, required this.chartType});
+  const MainCard(
+      {super.key,
+      required this.cardTitle,
+      required this.chartType,
+      required this.fireStoreEntry});
 
   @override
   State<MainCard> createState() => _WaterMainCardState();
@@ -20,6 +25,7 @@ class _WaterMainCardState extends State<MainCard> {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return CustomLineChartPage(
             chartTitle: widget.cardTitle,
+            fireStoreEntry: widget.fireStoreEntry,
           );
         }));
       },

@@ -7,12 +7,14 @@ class ParameterListPageModel {
   final double? parameterValue;
   final String displayIcon;
   final String unit;
+  final String fireStoreEntry;
 
   ParameterListPageModel({
     required this.parameter,
     this.parameterValue = 0,
     this.displayIcon = 'assets/icons/default_icon.png',
     this.unit = '',
+    required this.fireStoreEntry,
   });
 }
 
@@ -72,42 +74,50 @@ class ParameterListPage extends StatelessWidget {
               parameter: 'pH',
               parameterValue: double.parse(raspiPH), //Add raspi-value
               displayIcon: 'assets/icons/ph_icon.png',
-              unit: ''),
+              unit: '',
+              fireStoreEntry: 'ph'),
           ParameterListPageModel(
               parameter: 'Temperature',
               parameterValue: double.parse(raspiTemperature), //Add raspi-value
               displayIcon: 'assets/icons/temperature_icon.png',
-              unit: '°C'),
+              unit: '°C',
+              fireStoreEntry: 'temperature'),
           ParameterListPageModel(
               parameter: 'Turbidity',
               parameterValue: double.parse(raspiTurbidity), //Add raspi-value
               displayIcon: 'assets/icons/turbidity_icon.png',
-              unit: 'NTU'),
+              unit: 'NTU',
+              fireStoreEntry: 'turbidity'),
           ParameterListPageModel(
               parameter: 'Total Dissolved Solids',
               parameterValue: double.parse(raspiTDS), //Add raspi-value
               displayIcon: 'assets/icons/tds_icon.png',
-              unit: 'ppm'),
+              unit: 'ppm',
+              fireStoreEntry: 'tds'),
           ParameterListPageModel(
               parameter: 'Electrical Conductivity',
               parameterValue: double.parse(raspiEC), //Add raspi-value
               displayIcon: 'assets/icons/ec_icon.png',
-              unit: 'µS/cm'),
+              unit: 'µS/cm',
+              fireStoreEntry: 'ec'),
           ParameterListPageModel(
               parameter: 'Hardness',
               parameterValue: double.parse(raspiHardness), //Add raspi-value
               displayIcon: 'assets/icons/default_icon.png',
-              unit: 'ppm'),
+              unit: 'ppm',
+              fireStoreEntry: 'hardness'),
           ParameterListPageModel(
               parameter: 'Salinity',
               parameterValue: double.parse(raspiSalinity), //Add raspi-value
               displayIcon: 'assets/icons/default_icon.png',
-              unit: 'ppt'),
+              unit: 'ppt',
+              fireStoreEntry: 'salinity'),
           ParameterListPageModel(
               parameter: 'Dissolved Oxygen',
               parameterValue: double.parse(raspiDO), //Add raspi-value
               displayIcon: 'assets/icons/default_icon.png',
-              unit: 'mg/L'),
+              unit: 'mg/L',
+              fireStoreEntry: 'do'),
         ];
 
         return Scaffold(
@@ -132,7 +142,9 @@ class ParameterListPage extends StatelessWidget {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
                         return CustomLineChartPage(
-                            chartTitle: parameterData[index].parameter);
+                          chartTitle: parameterData[index].parameter,
+                          fireStoreEntry: parameterData[index].fireStoreEntry,
+                        );
                       }));
                     },
                     child: Container(

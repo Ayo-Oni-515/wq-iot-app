@@ -3,7 +3,8 @@ import 'package:wqm_app/charts/linear_graph.dart';
 
 class CustomLineChartPage extends StatelessWidget {
   final String chartTitle;
-  const CustomLineChartPage({super.key, required this.chartTitle});
+  final String fireStoreEntry;
+  const CustomLineChartPage({super.key, required this.chartTitle, required this.fireStoreEntry});
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +16,12 @@ class CustomLineChartPage extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: 600,
-              child: LinearChart(
-                chartHeader: chartTitle,
-              ),
-            ),
-            Spacer(
-              flex: 1,
-            )
-          ],
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height, // 60% of screen height
+        child: LinearChart(
+          chartHeader: chartTitle,
+          fireStoreEntry: fireStoreEntry,
         ),
       ),
     );

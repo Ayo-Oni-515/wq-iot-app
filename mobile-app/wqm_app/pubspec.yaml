@@ -43,7 +43,6 @@ dependencies:
   # firebase_messaging: latest_version
   google_fonts: ^6.2.1
   syncfusion_flutter_gauges: ^27.1.56
-  radial_progress: ^0.1.0
   syncfusion_flutter_charts: ^27.1.57
   cupertino_icons: ^1.0.6
   provider: ^6.1.2
