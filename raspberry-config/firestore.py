@@ -1,3 +1,4 @@
+from datetime import datetime
 import firebase_admin
 from firebase_admin import credentials, firestore
 
@@ -27,6 +28,23 @@ try:
     pump_control.update({
         "water_level": 70.50,
     })
+
+    # Add data to datastore
+    datastore = db.collection("datastore")
+    for i in range(2, 10):
+        datastore.add({
+            "do": i,
+            "ec": i,
+            "hardness": i,
+            "ph": i,
+            "salinity": i,
+            "tds": i,
+            "temperature": i,
+            "timestamp": datetime.now(),
+            "turbidity": i,
+            "water_level": i,
+            "wqi": i,
+        })
 
     # Read pump control data
     doc = pump_control.get()
