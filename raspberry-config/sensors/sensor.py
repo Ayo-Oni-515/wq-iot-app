@@ -1,23 +1,48 @@
 #!/usr/bin/env python3
 # import spidev
 
+class Analog_Sensor_Error(Exception):
+    """Custom exception for Analog Sensor Error."""
+    pass
+
+
+class Digital_Sensor_Error(Exception):
+    """Custom exception for Digital Sensor Error."""
+    pass
+
 
 class Analog_Sensor:
-    def __init__(self, bus=0, device=0, max_speed=1350000, channel=0):
+    '''
+    Handles Analog sensors using SPI communication protocol.
+    '''
+    def __init__(self, reference_voltage = 3.3, bus=0, device=0, max_speed=1350000, channel=0):
+        self.reference_voltage = reference_voltage
         self.channel = channel
-        # self.spi = spidev.SpiDev()
-        # self.spi.open(bus, device)  # Open on bus 0, device 0
-        # self.spi.max_speed_hz = max_speed
-        
+        try:
+            # self.spi = spidev.SpiDev()
+            # self.spi.open(bus, device) # Open spi communication on bus 0, device 0
+            # self.spi.max_speed_hz = max_speed #Sets communication speed between master(raspi) and slave(ADC)
+            # self.adc = self.spi.xfer2([1, (8 + self.channel) << 4, 0]) #Sends signal to the slave(ADC)
+            # self.data = ((self.adc[1] & 3) << 8) + self.adc[2] #Response gotten from slave(ADC) => Digital Signal
+            pass
+        except Exception as e:
+            raise Analog_Sensor_Error(f"SPI Error: {e}")
 
-    def read_adc(self): #SPI Communication
-        self.adc = self.spi.xfer2([1, (8 + self.channel) << 4, 0])
-        self.data = ((self.adc[1] & 3) << 8) + self.adc[2]
+
+    def read_adc(self): 
         return self.data
     
 
-    def read_voltage(self): 
-        return self.data * (3.3 / 1023)
+    def read_voltage(self): #Converts from a 10-bit digital Value to Voltage 
+        return self.data * (self.reference_voltage / 1023)
+    
+    
+    def close(self):
+        try:
+            # self.spi.close()
+            pass
+        except Exception as e:
+            raise Analog_Sensor_Error(f"SPI Error: {e}")
     
 
     def test(self):
@@ -25,8 +50,8 @@ class Analog_Sensor:
 
 
 class Digital_Sensor:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, gpio_pin):
+        self.gpio_pin = gpio_pin
 
 
 # class TurbiditySensor:

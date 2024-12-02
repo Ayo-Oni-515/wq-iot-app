@@ -12,14 +12,13 @@ import time
 
 # Importing Raspberry pi packages
 # import RPi.GPIO as GPIO
-# import spidev #(For SPI) already imported in the sensors package
-# import smbus #(For I2C)
+# import smbus #(For I2C) => LCD Screen
 
 
 #Importing Essential Packages
-# from sensors import *
-# from control import *
-# from errors import *
+import sensors as sns
+import control as ctrl
+import errors as err
 
 
 #GPIO cleanup from previous state (Automatically resets the GPIO Pins before startup)
@@ -51,5 +50,4 @@ import time
 
 
 # GPIO.cleanup()
-time.sleep(5)
-print('My name is ayodeji')
+print(ctrl.valves.test())

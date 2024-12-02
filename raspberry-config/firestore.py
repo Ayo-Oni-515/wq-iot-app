@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import time
 import firebase_admin
 from firebase_admin import credentials, firestore
 
@@ -31,7 +32,7 @@ try:
 
     # Add data to datastore
     datastore = db.collection("datastore")
-    for i in range(2, 10):
+    for i in range(1, 10):
         datastore.add({
             "do": i,
             "ec": i,
@@ -40,11 +41,12 @@ try:
             "salinity": i,
             "tds": i,
             "temperature": i,
-            "timestamp": datetime.now(),
+            "timestamp": datetime.now() - timedelta(hours=1), #Makes sure the time is set to UTC+1 Nigerian Time
             "turbidity": i,
             "water_level": i,
             "wqi": i,
         })
+        time.sleep(5)
 
     # Read pump control data
     doc = pump_control.get()

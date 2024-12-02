@@ -20,22 +20,28 @@ Measuring Range:
 
 Accuracy: ± 10% F.S. (25 ℃)
 
-Threshold Value:
+Threshold Value: 250 ~ 800µS/cm
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
 
 **Requires ADC(MCP3008) -> 10-bit 
 """
 
-value = 10
+from .sensor import Analog_Sensor
+from .sensor_constants import EC_MCP3008_ADC_PIN, EC_LOW, EC_HIGH
 
-def EC_post(args):
-    """
-    Meant to perform Power On Self Test (POST)
-    """
-    pass
+class EC_Sensor(Analog_Sensor):
+    '''
+    Handles EC Sensor.
+    '''
+    def __init__(self, channel=EC_MCP3008_ADC_PIN, low_threshold=EC_LOW, high_threshold =EC_HIGH):
+        super().__init__(channel)
 
 
-def tds_to_ec(args):
-    pass
+    def __str__(self):
+        return "EC Sensor Active!!!"
+
+
+    def ec_calculation(self):
+        adc_value = self.read_adc()
 

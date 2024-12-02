@@ -17,45 +17,30 @@ Unit: NTU (Nephelometric Turbidity Unit)
 
 Conversion Factor:
 
-Threshold Value:
+Threshold Value: 0 ~ 5NTU
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
 
 **Requires ADC(MCP3008) -> 10-bit 
 """
 
-from sensor import Analog_Sensor
-from sensor_constants import TURBIDITY_MCP3008_ADC_PIN
+from .sensor import Analog_Sensor
+from .sensor_constants import TURBIDITY_MCP3008_ADC_PIN, TURBIDITY_LOW, TURBIDITY_HIGH
 
 class Turbidity_Sensor(Analog_Sensor):
-    def __init__(self, bus=0, device=0, max_speed=1350000, channel=TURBIDITY_MCP3008_ADC_PIN):
-        super().__init__(bus, device, max_speed, channel)
+    '''
+    Handles Turbidity Sensor.
+    '''
+    def __init__(self, channel=TURBIDITY_MCP3008_ADC_PIN, low_threshold=TURBIDITY_LOW, high_threshold =TURBIDITY_HIGH):
+        super().__init__(channel)
 
 
-    def turbidity_post(self):
-        '''
-        Meant to perform Power On Self Test (POST)
-        '''
-        pass
+    def __str__(self):
+        return "Turbidity Sensor Active!!!"
 
 
     def turbidity_calculation(self):
         adc_value = self.read_adc()
-
-
-turbidity = Turbidity_Sensor()
-
-
-# def turbidity_post(args):
-#     '''
-#     Meant to perform Power On Self Test (POST)
-#     '''
-#     pass
-
-
-# def turbidity(args):
-#     pass
-
 
 
 # SPI setup

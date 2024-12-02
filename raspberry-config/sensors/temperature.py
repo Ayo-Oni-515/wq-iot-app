@@ -18,7 +18,7 @@ Measuring Range: -55℃ ~ +125℃ (-67℉ ~ +257℉)
 
 Resolution: 9-bit ~ 12-bit (10-bit)
 
-Threshold Value:
+Threshold Value: 10 ~ 25℃
 
 **It can be powered directly by the raspberry pi.
 Adapter module is equipped with a pull-up resistor, and 
@@ -29,23 +29,20 @@ Interfacing Protocol: 1-Wire Protocol.
 
 **Enable the 1-wire protocol.
 """
-from sensor import Digital_Sensor
-from sensor_constants import * #Check Later.
+from .sensor import Digital_Sensor
+from .sensor_constants import TEMPERATURE_GPIO_PIN, TEMPERATURE_LOW, TEMPERATURE_HIGH
 
-class Temperature_Sensor:
-    def __init__(self) -> None:
-        pass
-    
-
-    def temperature_post(args):
-        '''
-        Meant to perform Power On Self Test (POST)
-        '''
-        pass
+class Temperature_Sensor(Digital_Sensor):
+    '''
+    Handles Temperature Sensor.
+    '''
+    def __init__(self, gpio=TEMPERATURE_GPIO_PIN, low_threshold=TEMPERATURE_LOW, high_threshold =TEMPERATURE_HIGH):
+        super().__init__(gpio)
 
 
-    def temperature(args):
-        pass
+    def __str__(self):
+        return "Temperature Sensor Active!!!"
+
 
 
 

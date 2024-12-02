@@ -22,7 +22,7 @@ Accuracy: ±0.1pH (25°C)
 
 Response time: ≤ 1min.
 
-Threshold Value:
+Threshold Range: 6.5 ~ 8.5pH
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
 
@@ -31,23 +31,20 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 Note: Final Reading requires stabilization
 """
 
-from sensor import Analog_Sensor
-from sensor_constants import PH_MCP3008_ADC_PIN
+from .sensor import Analog_Sensor
+from .sensor_constants import PH_MCP3008_ADC_PIN, PH_LOW, PH_HIGH
 
 class PH_Sensor(Analog_Sensor):
-    def __init__(self, bus=0, device=0, max_speed=1350000, channel=PH_MCP3008_ADC_PIN):
-        super().__init__(bus, device, max_speed, channel)
+    '''
+    Handles pH Sensor.
+    '''
+    def __init__(self, channel=PH_MCP3008_ADC_PIN, low_threshold=PH_LOW, high_threshold =PH_HIGH):
+        super().__init__(channel)
 
 
-    def ph_post(self):
-        '''
-        Meant to perform Power On Self Test (POST)
-        '''
-        pass
+    def __str__(self):
+        return "PH Sensor Active!!!"
 
 
     def ph_calculation(self):
         adc_value = self.read_adc()
-
-
-ph = PH_Sensor()
