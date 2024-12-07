@@ -7,14 +7,10 @@ Electrode Probe Kit, PH Detection detect Sensor Module for Arduino.
 Operating Voltage: 5.0V
 
 Analog Output: 0.0 ~ 5.0V (>3.3v reference)
-
-Control Signal (Input): 
               
 Type: Analog Sensor.
 
 Unit: unitless.
-
-Conversion Factor:
 
 Measuring Range: 0 ~ 14pH
 
@@ -32,19 +28,17 @@ Note: Final Reading requires stabilization
 """
 
 from .sensor import Analog_Sensor
-from .sensor_constants import PH_MCP3008_ADC_PIN, PH_LOW, PH_HIGH
+from .sensor_constants import PH_MCP3008_ADC_PIN
+
 
 class PH_Sensor(Analog_Sensor):
     '''
     Handles pH Sensor.
     '''
-    def __init__(self, channel=PH_MCP3008_ADC_PIN, low_threshold=PH_LOW, high_threshold =PH_HIGH):
+    def __init__(self, channel=PH_MCP3008_ADC_PIN):
         super().__init__(channel)
 
 
-    def __str__(self):
-        return "PH Sensor Active!!!"
-
-
-    def ph_calculation(self):
-        adc_value = self.read_adc()
+    def ph(self):
+        # Final ph reading
+        return self.read_digital()

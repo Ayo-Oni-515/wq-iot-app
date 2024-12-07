@@ -8,15 +8,13 @@ Operating Voltage: 3.3V ~ 5.5V
 
 Analog Output: 0 ~ 2.3V (<3.3v reference)
 
-Control Signal  (Input) : 
-
 Type: Analog Sensor.
 
-Unit: µS/cm (microsiemens per centimeter)
+Unit: µS/cm (microsiemens per centimetre)
 
-Conversion Factor:
+Conversion Factor: 0.64 (converting from TDS(ppm == mg/L) to EC(µS/cm))
 
-Measuring Range:
+Measuring Range: 0 ~ 1562.5µS/cm
 
 Accuracy: ± 10% F.S. (25 ℃)
 
@@ -27,21 +25,12 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 **Requires ADC(MCP3008) -> 10-bit 
 """
 
-from .sensor import Analog_Sensor
-from .sensor_constants import EC_MCP3008_ADC_PIN, EC_LOW, EC_HIGH
+from .TDS import TDS_Sensor #EC Sensor get its value through the TDS Sensor
 
-class EC_Sensor(Analog_Sensor):
+
+class EC_Sensor(TDS_Sensor):
     '''
     Handles EC Sensor.
     '''
-    def __init__(self, channel=EC_MCP3008_ADC_PIN, low_threshold=EC_LOW, high_threshold =EC_HIGH):
-        super().__init__(channel)
-
-
-    def __str__(self):
-        return "EC Sensor Active!!!"
-
-
-    def ec_calculation(self):
-        adc_value = self.read_adc()
-
+    def ec(self):
+        return super().tds() / 0.64

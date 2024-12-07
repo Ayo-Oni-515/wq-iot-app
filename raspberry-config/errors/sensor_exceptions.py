@@ -1,29 +1,29 @@
 #!/usr/bin/env python3
 
 """
-This file contains exceptions  used in the project.
+This file contains sensor exceptions used in the project.
 """
 
-class phError(Exception):
+class PH_Sensor_Error(Exception):
     """Handles pH Sensor Error"""
     pass
 
 
-class temperatureError(Exception):
+class Temperature_Sensor_Error(Exception):
     """Handles Temperature Sensor Error"""
     pass
 
 
-class tdsError(Exception):
+class TDS_Sensor_Error(Exception):
     """Handles TDS Sensor Error"""
     pass
 
 
-class ecError(tdsError):
+class EC_Sensor_Error(TDS_Sensor_Error):
     """Handles EC Sensor Error"""
     pass
 
 
-class turbidityError(Exception):
+class Turbidity_Sensor_Error(Exception):
     """Handles Turbidity Sensor Error"""
     pass

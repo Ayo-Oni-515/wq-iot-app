@@ -30,34 +30,15 @@ Interfacing Protocol: 1-Wire Protocol.
 **Enable the 1-wire protocol.
 """
 from .sensor import Digital_Sensor
-from .sensor_constants import TEMPERATURE_GPIO_PIN, TEMPERATURE_LOW, TEMPERATURE_HIGH
 
 class Temperature_Sensor(Digital_Sensor):
     '''
     Handles Temperature Sensor.
     '''
-    def __init__(self, gpio=TEMPERATURE_GPIO_PIN, low_threshold=TEMPERATURE_LOW, high_threshold =TEMPERATURE_HIGH):
-        super().__init__(gpio)
+    def __init__(self):
+        super().__init__()
+    
 
-
-    def __str__(self):
-        return "Temperature Sensor Active!!!"
-
-
-
-
-
-
-
-
-#From ChatGPT
-# from w1thermsensor import W1ThermSensor
-
-# # Initialize the sensor
-# sensor = W1ThermSensor()
-
-# # Read temperature
-# temperature_celsius = sensor.get_temperature()
-# temperature_fahrenheit = sensor.get_temperature(W1ThermSensor.DEGREES_F)
-
-# print(f"Temperature: {temperature_celsius:.2f}°C / {temperature_fahrenheit:.2f}°F")
+    def temperature(self):
+        # Final temperature reading
+        return self.read_digital()
