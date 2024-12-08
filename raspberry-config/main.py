@@ -9,15 +9,33 @@ operation and control.
 
 #Importing Python Packages
 import time
+import RPi.GPIO as GPIO
 
 #Importing Essential Packages
 import sensors as snse
 import control as ctrl
 import errors as err
 
-#GPIO cleanup from previous state (Automatically resets the GPIO Pins before startup)
-# GPIO.cleanup()
+#GPIO cleanup from previous state(Automatically resets the GPIO Pins before startup)
+GPIO.cleanup()
 
-#Sensor GPIO Initialization (Set from packages)
+#Sensor GPIO Initialization (Se from packages)
 
-# GPIO.cleanup()
+def pump_control():
+    # Initialize Tank Sensor
+    tank_ultrasonic_sensor = ctrl.tank.Tank_Ultrasonic_Sensor()
+
+
+def quality_moitoring():
+    # Initialize Water Quality Sensors
+    ph_sensor = snse.pH.PH_Sensor()
+    tds_sensor = snse.TDS.TDS_Sensor()
+    ec_sensor = snse.EC.EC_Sensor()
+    turbidity_sensor = snse.turbidity.Turbidity_Sensor()
+    temperature_sensor = snse.temperature.Temperature_Sensor()
+
+    # Initialize Test Kit Ultrasonic Sensor
+    test_kit_ultrasonic_sensor = ctrl.test_kit.Test_Kit_Ultrasonic_Sensor()
+
+
+GPIO.cleanup()
