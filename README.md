@@ -6,7 +6,7 @@ Project Integration was achieved using a Raspberry Pi 4 for hardware automation,
 Hardware Commmunication Protocols utilized
 1. SPI (For Analog Sensors: pH, TDS and Turbidity)
 2. 1-Wire (For Digital Sensor: Temperature sensor)
-3. I2C (For the LCD Screen)
+3. I<sup>2</sup>C (For the LCD Screen)
 
 
 ### mobile-app/wqm-app/ 
