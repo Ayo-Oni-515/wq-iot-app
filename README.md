@@ -9,23 +9,23 @@ Hardware Commmunication Protocols utilized
 3. I<sup>2</sup>C (For the LCD Screen)
 
 
-### mobile-app/wqm-app/ 
+mobile-app/wqm-app/ 
 Flutter Application Directory
 
 To install dependencies
 
     flutter pub get
 
-Firebase Integration
+### Firebase Integration
     Do something
 ---
 
-### raspberry-config/
+raspberry-config/
 Python Script Directory for Raspberry Pi Configuration
 
 To install dependencies
 
     pip install -r requirements.txt
 
-Firebase Integration
+### Firebase Integration
     Do something
