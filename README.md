@@ -1,5 +1,5 @@
 # **Water Quality IoT App**
-## *An IoT Application with config files for water quality monitoring and pump control automation.*
+### *An IoT Application with config files for water quality monitoring and pump control automation.*
       
 Project Integration was achieved using a Raspberry Pi 4 for hardware automation, Flutter for creating the android application and FireBase for backend integration.
 
@@ -9,7 +9,7 @@ Hardware Commmunication Protocols utilized
 3. I<sup>2</sup>C (For the LCD Screen)
 
 
-mobile-app/wqm-app/ 
+## mobile-app/wqm-app/ 
 Flutter Application Directory
 
 To install dependencies
@@ -21,7 +21,8 @@ To install dependencies
 
 ---
 
-raspberry-config/
+## raspberry-config/
+
 Python Script Directory for Raspberry Pi Configuration
 
 To install dependencies
@@ -31,4 +32,3 @@ To install dependencies
 ### Firebase Integration
     Do something
 
----
