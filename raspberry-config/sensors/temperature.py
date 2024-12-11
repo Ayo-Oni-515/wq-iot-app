@@ -10,9 +10,7 @@ Control Signal: 3.3V (Communication through the 1-Wire Protocol.)
 
 Type: Digital Sensor.
 
-Unit: °C or °F.
-
-Conversion Factor:
+Unit: °C.
 
 Measuring Range: -55℃ ~ +125℃ (-67℉ ~ +257℉)
 

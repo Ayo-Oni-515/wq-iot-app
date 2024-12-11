@@ -1,7 +1,7 @@
 # wq-iot-app
-Desc: An IoT Application with config files for Water Quality Monitoring and Pump Control.
+## An IoT Application with config files for Water Quality Monitoring and Pump Control.
       
-      Integration was done with Raspberry Pi, Flutter and FireBase.
+Integration was done with Raspberry Pi, Flutter and FireBase.
 
       Raspberry Commmynication Protocol
       1. SPI (For Analog Sensors)

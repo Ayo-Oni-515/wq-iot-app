@@ -39,6 +39,7 @@ class _WqmHomeStateState extends State<WqmHomeState> {
           .collection('pumpControl') // Replace with your collection name
           .doc('fCgyfcht2wPkn1TJ05KE') // Replace with your document ID
           .update({'mode': 'Auto'});
+      // await FirebaseFirestore.instance.clearPersistence(); // Clear Firestore cache
       if (mounted) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const LoginPage()));

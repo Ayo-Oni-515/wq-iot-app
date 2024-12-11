@@ -30,8 +30,7 @@ class _LinearChartState extends State<LinearChart> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator.adaptive(),
-            );
-          }
+            );          }
           if (snapshot.hasError) {
             return Center(child: Text('Firestore Synchronization Failed.'));
           }

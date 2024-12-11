@@ -26,20 +26,52 @@ Working Frequency: 40kHz
 
 Blind Area: 20cm
 
-Threshold Value: min_level = , max_level =
+Threshold Value: mininimum level = 180cm, maximum level = 30cm
 
 """
 #Checks the level of water left in the tank
-#Signal the Relay to turn ON the Pump
-#Signal the Relay to turn OFF the Pump
+#Signal the Relay to turn ON the Pump if below threshold
+#Signal the Relay to turn OFF the Pump if at or above threshold
 
 import time
+import RPi.GPIO as GPIO
 from .ultrasonic import Ultrasonic_Sensor
-from .control_constatnts import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
+from .control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
     TANK_US_ECHO_GPIO, TANK_RELAY_GPIO
 
 
 class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
-    def __init__(min_level=TANK_LOW, max_level=TANK_HIGH, trigger_pin=TANK_US_TRIG_GPIO, echo_pin=TANK_US_ECHO_GPIO, tank_gpio= TANK_RELAY_GPIO):
+    def __init__(self, min_level=TANK_LOW, max_level=TANK_HIGH, trigger_pin=TANK_US_TRIG_GPIO,\
+                 echo_pin=TANK_US_ECHO_GPIO, tank_gpio= TANK_RELAY_GPIO):
         super().__init__(min_level, max_level, trigger_pin, echo_pin)
+        self.min_level = min_level
+        self.max_level = max_level
+        self.tank_gpio = tank_gpio
+
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.tank_gpio, GPIO.OUT)
+        GPIO.output(self.tank_gpio, GPIO.LOW)
+
+
+    def fill_tank(self):
+        while self.water_level() > self.max_level:
+            GPIO.output(self.tank_gpio, GPIO.HIGH)
+            time.sleep(0.5)
+        GPIO.output(self.tank_gpio, GPIO.LOW)
+
+    
+    def auto_mode(self, switch):
+        if switch == True:
+            while switch == True:
+                level = self.water_level()
+                if level > self.max_level:
+                    GPIO.output(self.inlet_valve, GPIO.HIGH)
+                    time.sleep(0.5)
+                else:
+                    GPIO.output(self.tank_gpio, GPIO.LOW)
+                    break
+        elif switch == False:
+            while switch == False:
+                GPIO.output(self.tank_gpio, GPIO.LOW)
+                
         

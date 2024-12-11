@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 """
-This is the python script for evaluating the project's selected wqi model (CCMEWQI).
+This python script evaluates the project's selected wqi model (CCMEWQI).
 It computes the water quality index based on the obtained parameter.
 """
 
 from sensors import sensor_constants as snse_const
 import sys
 
-def validator(ph, turbidity, ec, tds, temperature):
+def validator(ph, tds, ec, turbidity, temperature):
     # pH limit
     standard_ph_low = snse_const.PH_LOW
     standard_ph_high = snse_const.PH_HIGH
@@ -88,8 +88,7 @@ def validator(ph, turbidity, ec, tds, temperature):
     return result
 
 
-
-def wqi(ph, turbidity, ec, tds, temperature):
+def ccmewqi(ph, turbidity, ec, tds, temperature):
     validate = validator(ph, turbidity, ec, tds, temperature)   
     number_of_failed_variables = validate["number of failed variables"]
     number_of_failed_test = validate["number of failed test"] 
@@ -109,7 +108,6 @@ def wqi(ph, turbidity, ec, tds, temperature):
     
     return round(wqi, 2)
 
-# print(wqi(5, 2, 10000, 3000, 30)) #Test
 
 if __name__ == "__main__":
     sys.exit(0)

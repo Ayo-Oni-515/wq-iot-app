@@ -2,7 +2,6 @@
 
 """
 This python script continually monitors the raspberry pi's operating temperature.
-It then takes necessary actions to prevent device failure.
 """
 
 import os

@@ -4,7 +4,8 @@ import 'package:wqm_app/charts/linear_graph.dart';
 class CustomLineChartPage extends StatelessWidget {
   final String chartTitle;
   final String fireStoreEntry;
-  const CustomLineChartPage({super.key, required this.chartTitle, required this.fireStoreEntry});
+  const CustomLineChartPage(
+      {super.key, required this.chartTitle, required this.fireStoreEntry});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,8 @@ class CustomLineChartPage extends StatelessWidget {
       ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height, // 60% of screen height
+        height:
+            MediaQuery.of(context).size.height * 0.85, // 85% of screen height
         child: LinearChart(
           chartHeader: chartTitle,
           fireStoreEntry: fireStoreEntry,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# import spidev
-# from w1thermsensor import W1ThermSensor
+import spidev
+from w1thermsensor import W1ThermSensor
 import time
 
 class Analog_Sensor_Error(Exception):
@@ -58,7 +58,7 @@ class Digital_Sensor:
     def __init__(self):
         self.readings = []
         try:
-            # self.temp_sensor = W1ThermSensor()
+            self.temp_sensor = W1ThermSensor()
             pass
         except Exception as e:
             raise Digital_Sensor_Error(f"W1ThermSensor Error: {e}")

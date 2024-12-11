@@ -29,23 +29,49 @@ Blind Area: 2-3cm
 
 Resolution: 0.3cm
 
-Threshold Value: min_level = , max_level =
+Threshold Value: minimum level = 40cm , maximum level = 20cm
 
 """
 #Check test kit water level 
-#Open inlet valve
-#If full close inlet valve
+#Open inlet valve, If full close inlet valve
 #Take water Parameters
-# Open Outlet valve until empty **(Avoiding reflow: How high can water rise in a pipe)
+#Open Outlet valve until empty **(Avoiding reflow: How high can water rise in a pipe under S.T.P)
 
 import time
+import RPi.GPIO as GPIO
 from .ultrasonic import Ultrasonic_Sensor
-from .control_constatnts import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
+from .control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
     TEST_KIT_US_ECHO_GPIO, INLET_VALVE_RELAY_GPIO, OUTLET_VALVE_RELAY_GPIO
 
 
 class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
-    def __init__(min_level=TEST_KIT_LOW, max_level=TEST_KIT_HIGH,\
+    def __init__(self, min_level=TEST_KIT_LOW, max_level=TEST_KIT_HIGH,\
                  trigger_pin=TEST_KIT_US_TRIG_GPIO, echo_pin=TEST_KIT_US_ECHO_GPIO,\
-                inlet_valve=INLET_VALVE_RELAY_GPIO, oulet_valve=OUTLET_VALVE_RELAY_GPIO):
+                inlet_valve=INLET_VALVE_RELAY_GPIO, outlet_valve=OUTLET_VALVE_RELAY_GPIO):
         super().__init__(min_level, max_level, trigger_pin, echo_pin)
+        self.inlet_valve = inlet_valve
+        self.outlet_valve = outlet_valve
+        self.min_level = min_level
+        self.max_level = max_level
+
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.inlet_valve, GPIO.OUT)
+        GPIO.setup(self.outlet_valve, GPIO.OUT)
+        GPIO.output(self.inlet_valve, GPIO.LOW)
+        GPIO.output(self.outlet_valve, GPIO.LOW)
+
+        
+    def fill_test_kit(self):
+        while self.water_level() > self.max_level:
+            # Opens the inlet valve if the test kit water level is low
+            GPIO.output(self.inlet_valve, GPIO.HIGH)
+            time.sleep(0.5)
+        GPIO.output(self.inlet_valve, GPIO.LOW)
+
+    
+    def empty_test_kit(self):
+        while self.water_level() < self.min_level:
+            # Opens the outlet valve if the test kit water level is full
+            GPIO.output(self.outlet_valve, GPIO.HIGH)
+            time.sleep(0.5)
+        GPIO.output(self.outlet_valve, GPIO.LOW)

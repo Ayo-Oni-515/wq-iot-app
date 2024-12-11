@@ -13,8 +13,6 @@ Type: Analog Sensor.
 
 Unit: NTU (Nephelometric Turbidity Unit)
 
-Conversion Factor:
-
 Threshold Value: 0 ~ 5NTU
 
 Interfacing Protocol: SPI (Serial Peripheral Interface)
