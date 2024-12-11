@@ -17,11 +17,11 @@ def upload_to_firestore(ph, tds, ec, turbidity, temperature, water_level, wqi):
         # Update data for water quality parameters
         water_parameters = db.collection("waterParameters").document("ko9ATHykCZnw3RxkVzpP")
         water_parameters.update({
-            "do": 15, #obtain
+            "do": dissolved_oxygen(temperature), #obtain
             "ec": ec,
-            "hardness": 250, #obtain
+            "hardness": hardness(tds), #obtain
             "ph": ph,
-            "salinity": 18, #obtain
+            "salinity": salinity(tds), #obtain
             "tds": tds,
             "temperature": temperature,
             "turbidity": turbidity,
@@ -38,11 +38,11 @@ def upload_to_firestore(ph, tds, ec, turbidity, temperature, water_level, wqi):
         datastore = db.collection("datastore")
         for i in range(1, 10):
             datastore.add({
-                "do": i, #obtain
+                "do": dissolved_oxygen(temperature), #obtain
                 "ec": ec,
-                "hardness": i, #obtain
+                "hardness": hardness(tds), #obtain
                 "ph": ph,
-                "salinity": i, #obtain
+                "salinity": salinity(tds), #obtain
                 "tds": tds,
                 "temperature": temperature,
                 "timestamp": datetime.now() - timedelta(hours=1), #Makes sure the time is set to UTC+1 Nigerian Time
@@ -67,3 +67,15 @@ def get_from_firestore():
     else:
         print("No such document!")
 
+
+def dissolved_oxygen(temperature):
+    do = (14.6 - 0.41 * temperature) / (1 + 0.00022 * temperature)
+    return do
+
+
+def hardness(tds):
+    return tds * 0.7
+
+
+def salinity(tds):
+    return tds * 0.001
