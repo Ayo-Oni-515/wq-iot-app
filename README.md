@@ -18,6 +18,7 @@ To install dependencies
 
 ### Firebase Integration
     Do something
+
 ---
 
 raspberry-config/
@@ -29,3 +30,5 @@ To install dependencies
 
 ### Firebase Integration
     Do something
+
+---
