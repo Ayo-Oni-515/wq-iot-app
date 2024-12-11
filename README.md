@@ -1,35 +1,26 @@
-# wq-iot-app
-## An IoT Application with config files for Water Quality Monitoring and Pump Control.
+# **Water Quality IoT App**
+## *An IoT Application with config files for water quality monitoring and pump control automation.*
       
-Integration was done with Raspberry Pi, Flutter and FireBase.
+Project Integration was achieved using a Raspberry Pi 4 for hardware automation, Flutter for creating the android application and FireBase for backend integration.
 
-      Raspberry Commmynication Protocol
-      1. SPI (For Analog Sensors)
-      2. 1-Wire (For Digital Sensor)
-      3. I2C (For LCD Screen)*
-
-mobile-app/
-    Desc: Flutter Development Files
-
-raspberry-config/
-    Desc: Configuration files for Raspberry Pi
-
-    files.*
-        main.sh
-            pass
-    
-
-    subdirectories/
-        control/
-            pass
-        
-        dependencies/
-            pass
-        
-        errors/
-            pass
-        
-        logs/
-            pass
+Hardware Commmunication Protocols utilized
+1. SPI (For Analog Sensors: pH, TDS and Turbidity)
+2. 1-Wire (For Digital Sensor: Temperature sensor)
+3. I2C (For the LCD Screen)
 
 
+### [x] mobile-app/wqm-app/ 
+Flutter Application Directory
+
+    //Run to install dependencies
+
+    flutter pub get
+
+---
+
+### [x] raspberry-config/
+Python Script Directory for Raspberry Pi Configuration
+
+    # Run to install dependencies
+
+    pip install -r requirements.txt
