@@ -16,6 +16,8 @@ To install dependencies
 
     flutter pub get
 
+Firebase Integration
+    Do something
 ---
 
 ### raspberry-config/
@@ -24,3 +26,6 @@ Python Script Directory for Raspberry Pi Configuration
 To install dependencies
 
     pip install -r requirements.txt
+
+Firebase Integration
+    Do something
