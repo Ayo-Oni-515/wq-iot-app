@@ -32,12 +32,14 @@ class Analog_Sensor:
 
 
     def read_digital(self): 
-        while len(self.readings) != 20:
+        while len(self.readings) < 20:
             self.adc = self.spi.xfer2([1, (8 + self.channel) << 4, 0]) #Sends signal to the slave(ADC)
             self.data = ((self.adc[1] & 3) << 8) + self.adc[2] #Response gotten from slave(ADC) => Digital Signal
             self.readings.append(self.data)
+        average = sum(self.readings) / len(self.readings)
+        self.readings.clear()
         self.close()
-        return sum(self.readings) / len(self.readings)
+        return average
     
 
     def read_voltage(self): #Converts a 10-bit digital Value to Voltage (Required for calibrated sensors)
@@ -65,7 +67,9 @@ class Digital_Sensor:
 
 
     def read_digital(self):
-        while len(self.readings) != 20:
+        while len(self.readings) < 20:
             self.celsius_temp = self.temp_sensor.get_temperature()
             self.readings.append(self.celsius_temp)
-        return sum(self.readings) / len(self.readings)
+        average = sum(self.readings) / len(self.readings)
+        self.readings.clear()
+        return average

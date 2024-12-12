@@ -57,21 +57,25 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.inlet_valve, GPIO.OUT)
         GPIO.setup(self.outlet_valve, GPIO.OUT)
-        GPIO.output(self.inlet_valve, GPIO.LOW)
-        GPIO.output(self.outlet_valve, GPIO.LOW)
+        # Relay is active-low
+        #GPIO.HIGH = turn off relay
+        #GPIO.LOW = turn on relay
+        GPIO.output(self.inlet_valve, GPIO.LOW) #GPIO.HIGH
+        GPIO.output(self.outlet_valve, GPIO.LOW) #GPIO.HIGH
 
         
     def fill_test_kit(self):
+        # Opens the inlet valve if the test kit water level is low
+        GPIO.output(self.inlet_valve, GPIO.HIGH) #GPIO.LOW
         while self.water_level() > self.max_level:
-            # Opens the inlet valve if the test kit water level is low
-            GPIO.output(self.inlet_valve, GPIO.HIGH)
-            time.sleep(0.5)
-        GPIO.output(self.inlet_valve, GPIO.LOW)
+            time.sleep(1)
+        # Closes the inlet valve
+        GPIO.output(self.inlet_valve, GPIO.LOW) #GPIO.HIGH
 
     
     def empty_test_kit(self):
-        while self.water_level() < self.min_level:
-            # Opens the outlet valve if the test kit water level is full
-            GPIO.output(self.outlet_valve, GPIO.HIGH)
-            time.sleep(0.5)
-        GPIO.output(self.outlet_valve, GPIO.LOW)
+        # Opens the outlet valve if the test kit water level is full
+        GPIO.output(self.outlet_valve, GPIO.HIGH) #GPIO.LOW
+        while self.water_level() < self.min_level:    
+            time.sleep(1)
+        GPIO.output(self.outlet_valve, GPIO.LOW) #GPIO.HIGH

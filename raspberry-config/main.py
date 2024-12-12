@@ -40,7 +40,7 @@ def quality_moitoring():
     # Initialize Test Kit Ultrasonic Sensor
     test_kit_ultrasonic_sensor = ctrl.test_kit.Test_Kit_Ultrasonic_Sensor()
 
-    #Check test kit water level
+    #Check test kit water level and fill it if below threshold
     level = test_kit_ultrasonic_sensor.water_level()
 
     if level >= test_kit_ultrasonic_sensor.min_level:

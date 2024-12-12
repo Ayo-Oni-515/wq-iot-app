@@ -50,28 +50,26 @@ class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.tank_gpio, GPIO.OUT)
-        GPIO.output(self.tank_gpio, GPIO.LOW)
+        # Relay is active-low
+        #GPIO.HIGH = turn off relay
+        #GPIO.LOW = turn on relay
+        GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
 
 
     def fill_tank(self):
+        # Turn pump on if tank water level is low
+        GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.LOW
         while self.water_level() > self.max_level:
-            GPIO.output(self.tank_gpio, GPIO.HIGH)
-            time.sleep(0.5)
-        GPIO.output(self.tank_gpio, GPIO.LOW)
+            time.sleep(5)
+        # Turn pump off the tank
+        GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
 
     
     def auto_mode(self, switch):
-        if switch == True:
-            while switch == True:
-                level = self.water_level()
-                if level > self.max_level:
-                    GPIO.output(self.inlet_valve, GPIO.HIGH)
-                    time.sleep(0.5)
-                else:
-                    GPIO.output(self.tank_gpio, GPIO.LOW)
-                    break
-        elif switch == False:
-            while switch == False:
-                GPIO.output(self.tank_gpio, GPIO.LOW)
-                
-        
+        if switch:
+            if self.water_level() > self.max_level:
+                GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.LOW
+            elif self.water_level() <= self.max_level:
+                GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
+        else:
+            GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH

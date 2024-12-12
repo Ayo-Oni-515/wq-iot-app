@@ -36,21 +36,19 @@ def upload_to_firestore(ph, tds, ec, turbidity, temperature, water_level, wqi):
 
         # Add data to datastore
         datastore = db.collection("datastore")
-        for i in range(1, 10):
-            datastore.add({
-                "do": dissolved_oxygen(temperature), #obtain
-                "ec": ec,
-                "hardness": hardness(tds), #obtain
-                "ph": ph,
-                "salinity": salinity(tds), #obtain
-                "tds": tds,
-                "temperature": temperature,
-                "timestamp": datetime.now() - timedelta(hours=1), #Makes sure the time is set to UTC+1 Nigerian Time
-                "turbidity": turbidity,
-                "water_level": water_level, #obtain from tank water_level
-                "wqi": wqi, #obtain from ccmewqi
+        datastore.add({
+            "do": dissolved_oxygen(temperature), #obtain
+            "ec": ec,
+            "hardness": hardness(tds), #obtain
+            "ph": ph,
+            "salinity": salinity(tds), #obtain
+            "tds": tds,
+            "temperature": temperature,
+            "timestamp": datetime.now() - timedelta(hours=1), #Makes sure the time is set to UTC+1 Nigerian Time
+            "turbidity": turbidity,
+            "water_level": water_level, #obtain from tank water_level
+            "wqi": wqi, #obtain from ccmewqi
             })
-            time.sleep(5)
 
         # Read pump control data (store this in a separate function)
     except Exception as e:

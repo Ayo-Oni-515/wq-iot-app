@@ -1,0 +1,11 @@
+***CRONTAB Background Commamnds***
+
+# Runs the quality monitoring script every 15 minutes, between the hours of 6AM - 11:00PM
+
+
+# Runs the pump control script everytime
+
+
+# Handles Weekly Updates on the raspberry pi
+
+

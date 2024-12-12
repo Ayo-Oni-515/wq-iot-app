@@ -45,7 +45,9 @@ class Ultrasonic_Sensor:
     
     def water_level_percentage(self):
         percentage = (self.water_level() - self.min_level) / (self.max_level - self.min_level)
-        if percentage > 100:
-            # In thhe event the water level exceeds the threshold
+        if self.water_level() > self.min_level:
+            return 0
+        elif (percentage > 100) or (self.water_level() < self.max_level):
+            # In the event the water level exceeds the threshold
             return 100
         return (percentage * 100)
