@@ -35,8 +35,8 @@ Threshold Value: mininimum level = 180cm, maximum level = 30cm
 
 import time
 import RPi.GPIO as GPIO
-from .ultrasonic import Ultrasonic_Sensor
-from .control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
+from ultrasonic import Ultrasonic_Sensor
+from control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
     TANK_US_ECHO_GPIO, TANK_RELAY_GPIO
 
 
@@ -53,23 +53,23 @@ class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
         # Relay is active-low
         #GPIO.HIGH = turn off relay
         #GPIO.LOW = turn on relay
-        GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
+        GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.HIGH
 
 
     def fill_tank(self):
         # Turn pump on if tank water level is low
-        GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.LOW
+        GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.LOW
         while self.water_level() > self.max_level:
             time.sleep(5)
         # Turn pump off the tank
-        GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
+        GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.HIGH
 
     
     def auto_mode(self, switch):
         if switch:
             if self.water_level() > self.max_level:
-                GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.LOW
+                GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.LOW
             elif self.water_level() <= self.max_level:
-                GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
+                GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.HIGH
         else:
-            GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
+            GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.HIGH

@@ -7,7 +7,7 @@ network failure and for displaying data on the LCD screen.
 
 import json
 
-# add timestamp
+# add timestamp for data aggregate
 def update_local_json(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi):
     data = {'do': do, 
         'hard.': hardness, 
@@ -27,10 +27,19 @@ def update_local_json(do, hardness, salinity, ph, tds, ec, turbidity, temperatur
         pass
 
 
+# def update_local_json_aggregate(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi):
+#     try:
+#         with open('./dataaggregate.json', 'r') as file:
+#             previous = json.load(file)
+#     except Exception:
+#         pass
+
+
 def get_local_json():
-    with open('./datastore.json', 'r') as file:
-        output = json.load(file)
-    
+    try:
+        with open('./datastore.json', 'r') as file:
+            output = json.load(file)
+    except Exception:
+        pass
+
     return output
-    
-    

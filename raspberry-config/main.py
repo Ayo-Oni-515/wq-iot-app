@@ -47,34 +47,76 @@ def quality_moitoring():
         test_kit_ultrasonic_sensor.fill_test_kit()
 
     # Initialize Water Quality Sensors and take readings
-    ph_sensor = snse.pH.PH_Sensor()
-    ph = ph_sensor.ph()
+    try:
+        ph_sensor = snse.pH.PH_Sensor()
+        ph = ph_sensor.ph()
+    except:
+        #Set default values in the event of failure (easy detection)
+        ph = -1
 
-    tds_sensor = snse.TDS.TDS_Sensor()
-    tds = tds_sensor.tds()
+    try:
+        tds_sensor = snse.TDS.TDS_Sensor()
+        tds = tds_sensor.tds()
+    except:
+        #Set default values in the event of failure (easy detection)
+        tds = -1
+        
+    try:
+        ec_sensor = snse.EC.EC_Sensor()
+        ec = ec_sensor.ec()
+    except:
+        #Set default values in the event of failure (easy detection)
+        ec = -1
 
-    ec_sensor = snse.EC.EC_Sensor()
-    ec = ec_sensor.ec()
+    try:
+        turbidity_sensor = snse.turbidity.Turbidity_Sensor()
+        turbidity = turbidity_sensor.turbidity()
+    except:
+        #Set default values in the event of failure (easy detection)
+        turbidity = -1
 
-    turbidity_sensor = snse.turbidity.Turbidity_Sensor()
-    turbidity = turbidity_sensor.turbidity()
-
-    temperature_sensor = snse.temperature.Temperature_Sensor()
-    temperature = temperature_sensor.temperature()
+    try:
+        temperature_sensor = snse.temperature.Temperature_Sensor()
+        temperature = temperature_sensor.temperature()
+    except:
+        #Set default values in the event of failure (easy detection)
+        temperature = -1
 
     # Empty test kit after testing
     test_kit_ultrasonic_sensor.empty_test_kit()
 
-    #Obtain tank water level
-    water_level = tank_ultrasonic_sensor.water_level_percentage()
+    try:
+        #Obtain tank water level
+        water_level = tank_ultrasonic_sensor.water_level_percentage()
+    except:
+        #Set default values in the event of failure (easy detection)
+        water_level = -1
 
-    #Evaluate water quality index from obtained parameters
-    wqi = qi.ccmewqi(ph, turbidity, ec, tds, temperature)
+    try:
+        #Evaluate water quality index from obtained parameters
+        wqi = qi.ccmewqi(ph, turbidity, ec, tds, temperature)
+    except:
+        #Set default values in the event of failure (easy detection)
+        wqi = -1
 
     # Derived parameters
-    do = dissolved_oxygen(temperature)
-    h_ardness = hardness(tds)
-    s_alinity = salinity(tds)
+    try:
+        do = dissolved_oxygen(temperature)
+    except:
+        #Set default values in the event of failure (easy detection)\
+        do = -1
+
+    try:
+        h_ardness = hardness(tds)
+    except:
+        #Set default values in the event of failure (easy detection)
+        hardness = -1
+
+    try:
+        s_alinity = salinity(tds)
+    except:
+        #Set default values in the event of failure (easy detection)
+        salinity = -1
 
 
     return {'do': do, 'hardness': h_ardness, 'salinity': s_alinity, 'ph': ph, 'tds': tds, 'ec': ec, \

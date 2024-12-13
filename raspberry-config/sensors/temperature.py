@@ -27,7 +27,7 @@ Interfacing Protocol: 1-Wire Protocol.
 
 **Enable the 1-wire protocol.
 """
-from .sensor import Digital_Sensor
+from sensor import Digital_Sensor
 
 class Temperature_Sensor(Digital_Sensor):
     '''

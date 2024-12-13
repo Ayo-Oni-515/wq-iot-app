@@ -19,9 +19,9 @@ Trigger time: 10 microseconds
 
 Measuring Range: 2 ~ 450cm.
 
-Effectual Angle: 15°
+Effectual Angle: 15Â°
 
-Measuring Angle: 30°
+Measuring Angle: 30Â°
 
 Working Frequency: 40kHz
 
@@ -39,8 +39,8 @@ Threshold Value: minimum level = 40cm , maximum level = 20cm
 
 import time
 import RPi.GPIO as GPIO
-from .ultrasonic import Ultrasonic_Sensor
-from .control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
+from ultrasonic import Ultrasonic_Sensor
+from control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
     TEST_KIT_US_ECHO_GPIO, INLET_VALVE_RELAY_GPIO, OUTLET_VALVE_RELAY_GPIO
 
 
@@ -60,22 +60,23 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         # Relay is active-low
         #GPIO.HIGH = turn off relay
         #GPIO.LOW = turn on relay
-        GPIO.output(self.inlet_valve, GPIO.LOW) #GPIO.HIGH
-        GPIO.output(self.outlet_valve, GPIO.LOW) #GPIO.HIGH
+        GPIO.output(self.inlet_valve, GPIO.HIGH) #GPIO.HIGH
+        GPIO.output(self.outlet_valve, GPIO.HIGH) #GPIO.HIGH
 
         
     def fill_test_kit(self):
         # Opens the inlet valve if the test kit water level is low
-        GPIO.output(self.inlet_valve, GPIO.HIGH) #GPIO.LOW
+        GPIO.output(self.inlet_valve, GPIO.LOW) #GPIO.LOW
         while self.water_level() > self.max_level:
             time.sleep(1)
         # Closes the inlet valve
-        GPIO.output(self.inlet_valve, GPIO.LOW) #GPIO.HIGH
+        GPIO.output(self.inlet_valve, GPIO.HIGH) #GPIO.HIGH
 
     
     def empty_test_kit(self):
         # Opens the outlet valve if the test kit water level is full
-        GPIO.output(self.outlet_valve, GPIO.HIGH) #GPIO.LOW
+        GPIO.output(self.outlet_valve, GPIO.LOW) #GPIO.LOW
         while self.water_level() < self.min_level:    
             time.sleep(1)
-        GPIO.output(self.outlet_valve, GPIO.LOW) #GPIO.HIGH
+        GPIO.output(self.outlet_valve, GPIO.HIGH) #GPIO.HIGH
+

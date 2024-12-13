@@ -5,11 +5,16 @@ This script handles the LCD screen meant to display parameter values.
 """
 
 import time
-import raspi_temp #Displays pi's temperature on the second line permanantly.
 from RPLCD.i2c import CharLCD
+from localstore import get_local_json
+import raspi_temp #Displays pi's temperature on the second line permanantly.
 
-# Initialize the LCD (replace '0x27' with your I2C address)
-lcd = CharLCD('PCF8574', 0x27)
+
+try: #Error in initializing lcd screen
+	# Initialize the LCD (replace '0x27' with your I2C address)
+	lcd = CharLCD('PCF8574', 0x27)
+except Exception:
+	pass
 
 def display(data):
     for parameter, value in data.items():

@@ -25,7 +25,7 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 **Requires ADC(MCP3008) -> 10-bit 
 """
 
-from .TDS import TDS_Sensor #EC Sensor get its value through the TDS Sensor
+from TDS import TDS_Sensor #EC Sensor get its value through the TDS Sensor
 
 
 class EC_Sensor(TDS_Sensor):

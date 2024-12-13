@@ -13,7 +13,12 @@ GPIO.cleanup()
 while True:
     #Obtains parameters 
     data = quality_moitoring()
+
+    # Upload data to firestore
     firestore.upload_to_firestore(
+        data['do'],
+        data['hardness'],
+        data['salinity'],
         data['ph'],
         data['tds'],
         data['ec'],
@@ -22,6 +27,8 @@ while True:
         data['water level'],
         data['wqi']        
     )
-    # lcd.display(data)
-    time.sleep(900) #15 minutes delay time
+
+    lcd.display(data)
+    
+    # time.sleep(900) #15 minutes delay time (Delay to be handled by crontab)
 

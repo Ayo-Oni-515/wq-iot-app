@@ -24,8 +24,8 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 **Requires ADC(MCP3008) -> 10-bit 
 """
 
-from .sensor import Analog_Sensor
-from .sensor_constants import TDS_MCP3008_ADC_PIN
+from sensor import Analog_Sensor
+from sensor_constants import TDS_MCP3008_ADC_PIN
 
 
 class TDS_Sensor(Analog_Sensor):

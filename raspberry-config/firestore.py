@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import time
 import firebase_admin
 from firebase_admin import credentials, firestore
+from localstore import update_local_json_aggregate
 
 # Initialize Firebase
 cred = credentials.Certificate("firebase-services-account.json")
@@ -52,7 +53,9 @@ def upload_to_firestore(do, hardness, salinity, ph, tds, ec, turbidity, temperat
 
         # Read pump control data (store this in a separate function)
     except Exception as e:
-        print(f"Error: {e}")
+        # update_local_json_aggregate(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi)
+        pass
+        
 
 
 def get_from_firestore():

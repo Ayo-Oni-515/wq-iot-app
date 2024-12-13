@@ -21,8 +21,8 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 **Requires calibration.
 """
 
-from .sensor import Analog_Sensor
-from .sensor_constants import TURBIDITY_MCP3008_ADC_PIN
+from sensor import Analog_Sensor
+from sensor_constants import TURBIDITY_MCP3008_ADC_PIN
 
 class Turbidity_Sensor(Analog_Sensor):
     '''
