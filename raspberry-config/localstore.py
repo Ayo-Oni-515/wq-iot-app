@@ -10,14 +10,14 @@ import json
 # add timestamp
 def update_local_json(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi):
     data = {'do': do, 
-        'hardness': hardness, 
-        'salinity': salinity, 
+        'hard.': hardness, 
+        'sal.': salinity, 
         'ph': ph, 
         'tds': tds, 
         'ec': ec,
-        'turbidity': turbidity, 
-        'temperature': temperature, 
-        'water level': water_level, 
+        'turb.': turbidity, 
+        'temp.': temperature, 
+        'waterL': water_level, 
         'wqi': wqi}
 
     try:
@@ -28,7 +28,7 @@ def update_local_json(do, hardness, salinity, ph, tds, ec, turbidity, temperatur
 
 
 def get_local_json():
-    with open('../datastore.json', 'r') as file:
+    with open('./datastore.json', 'r') as file:
         output = json.load(file)
     
     return output
