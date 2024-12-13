@@ -2,6 +2,7 @@
 
 """
 This python script presents the data on a dashboard whilst on the pi.
+utilises the Streamlit package for data presentation.
 (Might not be in the final implementation).
 """
 

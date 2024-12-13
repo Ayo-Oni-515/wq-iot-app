@@ -12,16 +12,16 @@ firebase_admin.initialize_app(cred)
 # Accessing Firestore
 db = firestore.client()
 
-def upload_to_firestore(ph, tds, ec, turbidity, temperature, water_level, wqi):
+def upload_to_firestore(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi):
     try:
         # Update data for water quality parameters
         water_parameters = db.collection("waterParameters").document("ko9ATHykCZnw3RxkVzpP")
         water_parameters.update({
-            "do": dissolved_oxygen(temperature), #obtain
+            "do": do, #obtain
             "ec": ec,
-            "hardness": hardness(tds), #obtain
+            "hardness": hardness, #obtain
             "ph": ph,
-            "salinity": salinity(tds), #obtain
+            "salinity": salinity, #obtain
             "tds": tds,
             "temperature": temperature,
             "turbidity": turbidity,
@@ -37,11 +37,11 @@ def upload_to_firestore(ph, tds, ec, turbidity, temperature, water_level, wqi):
         # Add data to datastore
         datastore = db.collection("datastore")
         datastore.add({
-            "do": dissolved_oxygen(temperature), #obtain
+            "do": do, #obtain
             "ec": ec,
-            "hardness": hardness(tds), #obtain
+            "hardness": hardness, #obtain
             "ph": ph,
-            "salinity": salinity(tds), #obtain
+            "salinity": salinity, #obtain
             "tds": tds,
             "temperature": temperature,
             "timestamp": datetime.now() - timedelta(hours=1), #Makes sure the time is set to UTC+1 Nigerian Time
@@ -60,20 +60,11 @@ def get_from_firestore():
     doc = pump_control.get()
     if doc.exists:
         doc = doc.to_dict()
-        print(f"Document data: {doc['mode'], doc['switch']}")
-        print(doc)
+        mode = doc['mode']
+        switch = doc['switch']
+        # print(f"Document data: {doc['mode'], doc['switch']}")
+        return {'mode': mode, 'switch': switch}
     else:
-        print("No such document!")
+        return None
 
 
-def dissolved_oxygen(temperature):
-    do = (14.6 - 0.41 * temperature) / (1 + 0.00022 * temperature)
-    return do
-
-
-def hardness(tds):
-    return tds * 0.7
-
-
-def salinity(tds):
-    return tds * 0.001

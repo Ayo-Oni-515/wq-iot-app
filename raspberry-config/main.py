@@ -71,4 +71,24 @@ def quality_moitoring():
     #Evaluate water quality index from obtained parameters
     wqi = qi.ccmewqi(ph, turbidity, ec, tds, temperature)
 
-    return {'ph': ph, 'tds': tds, 'ec': ec, 'turbidity': turbidity, 'temperature': temperature, 'water level': water_level, 'wqi': wqi}
+    # Derived parameters
+    do = dissolved_oxygen(temperature)
+    h_ardness = hardness(tds)
+    s_alinity = salinity(tds)
+
+
+    return {'do': do, 'hardness': h_ardness, 'salinity': s_alinity, 'ph': ph, 'tds': tds, 'ec': ec, \
+            'turbidity': turbidity, 'temperature': temperature, 'water level': water_level, 'wqi': wqi}
+
+
+def dissolved_oxygen(temperature):
+    do = (14.6 - 0.41 * temperature) / (1 + 0.00022 * temperature)
+    return do
+
+
+def hardness(tds):
+    return tds * 0.7
+
+
+def salinity(tds):
+    return tds * 0.001
