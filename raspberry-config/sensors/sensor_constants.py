@@ -10,23 +10,23 @@ import sys
 #pH CONSTANTS [unitless]
 PH_LOW = 6.5
 PH_HIGH = 8.5
-PH_MCP3008_ADC_PIN = 0 #Channel 0 (analog)
+PH_MCP3008_ADC_PIN = 2 #Channel 2 (analog)
 
 
 #TDS CONSTANTS [milligram per litre (mg/L) => same as ppm]
 TDS_HIGH = 500
-TDS_MCP3008_ADC_PIN = 1 #Channel 1 (analog)
+TDS_MCP3008_ADC_PIN = 3 #Channel 3 (analog)
 
 
 #EC CONSTANTS depends on TDS [µS/cm (microsiemens per centimeter)]
 EC_LOW = 250
 EC_HIGH = 800
-# EC_MCP3008_ADC_PIN = 1 #Channel 1 (analog)
+# EC_MCP3008_ADC_PIN = 3 #Channel 3 (analog)
 
 
 #Turbidity CONSTANTS [NTU (Nephelometric Turbidity Unit)]
 TURBIDITY_HIGH = 5
-TURBIDITY_MCP3008_ADC_PIN = 2 #Channel 2 (analog)
+TURBIDITY_MCP3008_ADC_PIN = 4 #Channel 4 (analog)
 
 
 #Temperature CONSTANTS [°C]
