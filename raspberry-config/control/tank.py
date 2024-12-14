@@ -35,8 +35,8 @@ Threshold Value: mininimum level = 180cm, maximum level = 30cm
 
 import time
 import RPi.GPIO as GPIO
-from ultrasonic import Ultrasonic_Sensor
-from control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
+from .ultrasonic import Ultrasonic_Sensor
+from .control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
     TANK_US_ECHO_GPIO, TANK_RELAY_GPIO
 
 
@@ -60,7 +60,7 @@ class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
         # Turn pump on if tank water level is low
         GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.LOW
         while self.water_level() > self.max_level:
-            time.sleep(5)
+            time.sleep(2)
         # Turn pump off the tank
         GPIO.output(self.tank_gpio, GPIO.HIGH) #GPIO.HIGH
 

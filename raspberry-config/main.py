@@ -110,13 +110,13 @@ def quality_moitoring():
         h_ardness = hardness(tds)
     except:
         #Set default values in the event of failure (easy detection)
-        hardness = -1
+        h_ardness = -1
 
     try:
         s_alinity = salinity(tds)
     except:
         #Set default values in the event of failure (easy detection)
-        salinity = -1
+        s_alinity = -1
 
 
     return {'do': do, 'hardness': h_ardness, 'salinity': s_alinity, 'ph': ph, 'tds': tds, 'ec': ec, \

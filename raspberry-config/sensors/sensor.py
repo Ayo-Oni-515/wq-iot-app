@@ -23,8 +23,8 @@ class Analog_Sensor:
         self.channel = channel
         self.readings = []
         try:
-            time.sleep(30) #30 second delay for sensor stabilization
-            # self.spi = spidev.SpiDev()
+            time.sleep(5) #30 second delay for sensor stabilization
+            self.spi = spidev.SpiDev()
             self.spi.open(bus, device) # Open spi communication on bus 0, device 0
             self.spi.max_speed_hz = max_speed #Sets communication speed between master(raspi) and slave(ADC)
         except Exception as e:

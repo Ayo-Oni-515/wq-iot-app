@@ -11,7 +11,7 @@ import sys
 
 #Pump CONSTANTS (centimetres): BCM Numbering
 TANK_RELAY_GPIO = 22         #Tank relay pin
-TANK_LOW = 180               #Empty tank (cm): For a 7 feet tank
+TANK_LOW = 200               #Empty tank (cm): For a 7 feet tank
 TANK_HIGH = 30               #Full Tank (cm): US Blind Area < 20cm (Full Tank)
 TANK_US_TRIG_GPIO = 25       #Tank US trigger pin    
 TANK_US_ECHO_GPIO = 16       #Tank US echo pin

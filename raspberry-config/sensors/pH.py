@@ -27,8 +27,8 @@ Interfacing Protocol: SPI (Serial Peripheral Interface)
 Note: Final Reading requires stabilization
 """
 
-from sensor import Analog_Sensor
-from sensor_constants import PH_MCP3008_ADC_PIN
+from .sensor import Analog_Sensor
+from .sensor_constants import PH_MCP3008_ADC_PIN
 
 
 class PH_Sensor(Analog_Sensor):

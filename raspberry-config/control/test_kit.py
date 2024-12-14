@@ -39,8 +39,8 @@ Threshold Value: minimum level = 40cm , maximum level = 20cm
 
 import time
 import RPi.GPIO as GPIO
-from ultrasonic import Ultrasonic_Sensor
-from control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
+from .ultrasonic import Ultrasonic_Sensor
+from .control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
     TEST_KIT_US_ECHO_GPIO, INLET_VALVE_RELAY_GPIO, OUTLET_VALVE_RELAY_GPIO
 
 
