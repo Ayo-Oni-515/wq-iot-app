@@ -5,33 +5,31 @@ This script handles the test kit's operation.
 """
 
 """
-Test Kit Containment Ultrasonic Sensor: HC-SR04 Ultrasonic Sensor Module.
+Waterproof Ultrasonic Sensor: JSN-SR04T Integrated Ultrasonic Distance 
+Measuring Sensor Transducer Module Waterproof.
 
-Operating Voltage: 5.0V
+Operating Voltage: 3.0 ~ 5.5V
 
-Total Current: < 5mA
+Total Current: 30mA 
               
 Type: Digital Sensor.
 
-Unit: centimetre (cm).
+Unit: centimetres (cm)
 
 Trigger time: 10 microseconds
 
-Measuring Range: 2 ~ 450cm.
+Measuring Range: 25cm ~ 4m.
 
-Effectual Angle: 15Â°
-
-Measuring Angle: 30Â°
+Detecting Angle: 75°
 
 Working Frequency: 40kHz
 
-Blind Area: 2-3cm
+Blind Area: 20cm
 
-Resolution: 0.3cm
-
-Threshold Value: minimum level = 40cm , maximum level = 20cm
+Threshold Value: mininimum level = 180cm, maximum level = 30cm
 
 """
+
 #Check test kit water level 
 #Open inlet valve, If full close inlet valve
 #Take water Parameters

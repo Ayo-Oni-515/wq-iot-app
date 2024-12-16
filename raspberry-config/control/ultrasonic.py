@@ -22,9 +22,6 @@ class Ultrasonic_Sensor:
 
         
     def water_level(self):
-        # Trigger the sensor
-        GPIO.output(self.trigger_pin, False)
-        time.sleep(0.000002) # 2 microseconds delay
         GPIO.output(self.trigger_pin, True)
         time.sleep(0.00001)  # 10 microseconds pulse
         GPIO.output(self.trigger_pin, False)

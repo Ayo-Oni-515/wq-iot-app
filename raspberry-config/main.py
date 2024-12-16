@@ -119,8 +119,9 @@ def quality_moitoring():
         s_alinity = -1
 
 
-    return {'do': do, 'hardness': h_ardness, 'salinity': s_alinity, 'ph': ph, 'tds': tds, 'ec': ec, \
-            'turbidity': turbidity, 'temperature': temperature, 'water level': water_level, 'wqi': wqi}
+    return {'do': round(do, 2), 'hardness': round(h_ardness, 2), 'salinity': round(s_alinity, 2), 'ph': round(ph,22),\
+             'tds': round(tds, 2), 'ec': round(ec, 2), 'turbidity': round(turbidity, 2), 'temperature': round(temperature, 2),\
+            'water level': round(water_level, 2), 'wqi': round(wqi, 2)}
 
 
 def dissolved_oxygen(temperature):
