@@ -55,7 +55,7 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.inlet_valve, GPIO.OUT)
         GPIO.setup(self.outlet_valve, GPIO.OUT)
-        # Relay is active-low
+        # Relay is an active-low relay
         #GPIO.HIGH = turn off relay
         #GPIO.LOW = turn on relay
         GPIO.output(self.inlet_valve, GPIO.HIGH) #GPIO.HIGH
@@ -76,5 +76,4 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         GPIO.output(self.outlet_valve, GPIO.LOW) #GPIO.LOW
         while self.water_level() < self.min_level:    
             time.sleep(1)
-        GPIO.output(self.outlet_valve, GPIO.HIGH) #GPIO.HIGH
-
+        GPIO.output(self.outlet_valve, GPIO.HIGH) #GPIO.HIGHs

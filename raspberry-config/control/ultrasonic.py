@@ -22,29 +22,35 @@ class Ultrasonic_Sensor:
 
         
     def water_level(self):
-        GPIO.output(self.trigger_pin, True)
-        time.sleep(0.00001)  # 10 microseconds pulse
-        GPIO.output(self.trigger_pin, False)
+        try:
+            GPIO.output(self.trigger_pin, True)
+            time.sleep(0.00001)  # 10 microseconds pulse
+            GPIO.output(self.trigger_pin, False)
 
-        # Measure the time for echo to return
-        while GPIO.input(self.echo_pin) == 0:
-            start_time = time.time()
+            # Measure the time for echo to return
+            while GPIO.input(self.echo_pin) == 0:
+                start_time = time.time()
 
-        while GPIO.input(self.echo_pin) == 1:
-            end_time = time.time()
+            while GPIO.input(self.echo_pin) == 1:
+                end_time = time.time()
 
-        # Calculate distance
-        self.duration = end_time - start_time
-        self.distance = (self.duration * 34300) / 2  # Speed of sound = 343 m/s
+            # Calculate distance
+            self.duration = end_time - start_time
+            self.distance = (self.duration * 34300) / 2  # Speed of sound = 343 m/s
 
-        return self.distance
+            return self.distance
+        finally:
+            GPIO.cleanup()
     
     
     def water_level_percentage(self):
-        percentage = (self.water_level() - self.min_level) / (self.max_level - self.min_level)
-        if self.water_level() > self.min_level:
-            return 0
-        elif (percentage > 100) or (self.water_level() < self.max_level):
-            # In the event the water level exceeds the threshold
-            return 100
-        return (percentage * 100)
+        try:
+            percentage = (self.water_level() - self.min_level) / (self.max_level - self.min_level)
+            if self.water_level() > self.min_level:
+                return 0
+            elif (percentage > 100) or (self.water_level() < self.max_level):
+                # In the event the water level exceeds the threshold
+                return 100
+            return (percentage * 100)
+        finally:
+            GPIO.cleanup()

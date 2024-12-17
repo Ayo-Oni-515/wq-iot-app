@@ -1,6 +1,6 @@
 ***CRONTAB Background Commamnds***
 
-# Runs the quality monitoring script every 15 minutes, between the hours of 6AM - 11:00PM (adjust directory)
+# Runs the quality monitoring script every 20 minutes, between the hours of 6AM - 11:00PM (adjust directory)
 */15 6-23 * * * /usr/bin/python3 /home/pi/scripts/wqm.py 
 
 # Runs the pump control script everytime between the hours of 6AM - 11:00PM (adjust directory)

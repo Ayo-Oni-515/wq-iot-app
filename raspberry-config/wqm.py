@@ -1,21 +1,36 @@
 #!/usr/bin/env python3
 
-from main import quality_moitoring
-import time
-import lcd
-import firestore
+from main import quality_monitoring
+from localstore import get_local_json, update_local_json
+from firestore import update_realtime_firestore_data, update_firestore_data
 
-import RPi.GPIO as GPIO
+#carries out quality monitoring procedure 
+data = quality_monitoring()
 
-#GPIO cleanup from previous state(Automatically resets the GPIO Pins before startup)
-GPIO.cleanup()
+#Checks local storage for any data
+store = get_local_json()
 
-while True:
-    #Obtains parameters 
-    data = quality_moitoring()
+#Check localstore if any data is present, then upload to firestore
+if len(store) > 0:
+    for i in range(len(store)):
+        update_firestore_data(
+            store[i]['do'],
+            store[i]['hardness'],
+            store[i]['salinity'],
+            store[i]['ph'],
+            store[i]['tds'],
+            store[i]['ec'],
+            store[i]['turbidity'],
+            store[i]['temperature'],
+            store[i]['water_level'],
+            store[i]['wqi'],
+            store[i]['timestamp'],            
+        )
+    store.clear()
 
-    # Upload data to firestore
-    firestore.upload_to_firestore(
+#Uplaod to firestore if no error
+try:
+    update_realtime_firestore_data(
         data['do'],
         data['hardness'],
         data['salinity'],
@@ -24,11 +39,34 @@ while True:
         data['ec'],
         data['turbidity'],
         data['temperature'],
-        data['water level'],
+        data['water_level'],
         data['wqi']        
     )
-
-    lcd.display(data)
     
-    # time.sleep(900) #15 minutes delay time (Delay to be handled by crontab)
+    update_firestore_data(
+        data['do'],
+        data['hardness'],
+        data['salinity'],
+        data['ph'],
+        data['tds'],
+        data['ec'],
+        data['turbidity'],
+        data['temperature'],
+        data['water_level'],
+        data['wqi']
+    )
+except:
+    #Store in local json file if any error occurs
+    update_local_json(
+        data['do'],
+        data['hardness'],
+        data['salinity'],
+        data['ph'],
+        data['tds'],
+        data['ec'],
+        data['turbidity'],
+        data['temperature'],
+        data['water_level'],
+        data['wqi'])
 
+# time.sleep(900) #20 minutes delay time (Delay handled by crontab)

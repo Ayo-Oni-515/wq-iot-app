@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
-import RPi.GPIO as GPIO
-
-#GPIO cleanup from previous state(Automatically resets the GPIO Pins before startup)
-GPIO.cleanup()
-
 from main import pump_control
+from firestore import listen_to_firestore
 
-while True:
-    pump_control()
+mode, switch = "Auto", False
 
-GPIO.cleanup()
+listener = listen_to_firestore()
+
+pump_control(mode, switch)
+
+listener.unsubscribe()

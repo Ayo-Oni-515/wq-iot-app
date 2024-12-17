@@ -39,7 +39,6 @@ from .ultrasonic import Ultrasonic_Sensor
 from .control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
     TANK_US_ECHO_GPIO, TANK_RELAY_GPIO
 
-
 class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
     def __init__(self, min_level=TANK_LOW, max_level=TANK_HIGH, trigger_pin=TANK_US_TRIG_GPIO,\
                  echo_pin=TANK_US_ECHO_GPIO, tank_gpio= TANK_RELAY_GPIO):
@@ -63,7 +62,7 @@ class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
             time.sleep(2)
         # Turn pump off the tank
         GPIO.output(self.tank_gpio, GPIO.LOW) #GPIO.HIGH
-
+        
     
     def auto_mode(self, switch):
         if switch:
