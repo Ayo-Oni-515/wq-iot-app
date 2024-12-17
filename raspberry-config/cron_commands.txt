@@ -9,5 +9,5 @@
 # Handles weekly updates on the raspberry pi on Sundays at 2:00AM and cleans up afterwards
 0 2 * * 0 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean
 
-# Handles GPIO cleanup on startup
-@reboot /usr/bin/python3 /path/to/your/script.py
+# Handles GPIO cleanup everytime on startup
+@reboot /usr/bin/python3 /path/to/your/startup.py
