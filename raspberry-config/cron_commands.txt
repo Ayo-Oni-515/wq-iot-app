@@ -6,7 +6,8 @@
 # Runs the pump control script everytime between the hours of 6AM - 11:00PM (adjust directory)
 * 6-23 * * * /usr/bin/python3 /home/pi/scripts/pump_control.py 
 
-# Handles Weekly Updates on the raspberry pi
+# Handles weekly updates on the raspberry pi on Sundays at 2:00AM and cleans up afterwards
+0 2 * * 0 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean
 
-
-#
+# Handles GPIO cleanup on startup
+@reboot /usr/bin/python3 /path/to/your/script.py
