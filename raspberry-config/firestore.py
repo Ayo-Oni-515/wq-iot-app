@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import firebase_admin
 from firebase_admin import credentials, firestore
 
@@ -35,7 +35,7 @@ def update_realtime_firestore_data(do, hardness, salinity, ph, tds, ec, turbidit
 
 
 #Data collection over time
-def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi, timestamp=datetime.now().isoformat()):
+def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi, timestamp=datetime.now(timezone(timedelta(hours=1)))):
     # Add data to datastore
     datastore = db.collection("datastore")
     datastore.add({
@@ -46,7 +46,7 @@ def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temper
         "salinity": salinity, #obtain
         "tds": tds,
         "temperature": temperature,
-        "timestamp": datetime.strptime(timestamp + "Z", "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%d %B %Y at %H:%M:%S UTC+1"), #Makes sure the time is set to UTC+1 Nigerian Time
+        "timestamp": timestamp, #Makes sure the time is set to UTC+1 Nigerian Time
         "turbidity": turbidity,
         "water_level": water_level, #obtain from tank water_level
         "wqi": wqi, #obtain from ccmewqi

@@ -6,7 +6,7 @@ in the event of a network failure.
 """
 
 import json
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 def get_local_json():
     try:
@@ -28,7 +28,7 @@ def update_local_json(do, hardness, salinity, ph, tds, ec, turbidity, temperatur
         'temperature': temperature, 
         'water_level': water_level, 
         'wqi': wqi,
-        'timestamp': datetime.now().isoformat() + "Z"}
+        'timestamp': datetime.now(timezone(timedelta(hours=1)))}
     
     localstore = get_local_json()
 
