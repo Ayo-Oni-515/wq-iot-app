@@ -16,15 +16,15 @@ class ParameterListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: double.infinity,
-        child: Card(
+      width: double.infinity,
+      child: Card(
           shadowColor: Theme.of(context).colorScheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
                 leading: CircleAvatar(
                   radius: 22,
                   backgroundImage: AssetImage(displayIcon),
@@ -33,18 +33,8 @@ class ParameterListCard extends StatelessWidget {
                   '${parameterValue.toString()} $unit',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                title: Text(parameter),
-                subtitle: Row(children: [
-                  Icon(
-                    Icons.arrow_drop_up, //Add raspi-value
-                    color: Colors.green,
-                  ), //Add raspi-value
-                  Text(
-                    '3.5%', //Add raspi-value
-                    style: TextStyle(color: Colors.green),
-                  ), //Add raspi-value
-                ]),
-              )),
-        ));
+                title: Text(parameter)),
+          )),
+    );
   }
 }
