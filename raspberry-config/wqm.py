@@ -29,7 +29,8 @@ if len(store) > 0:
             store[i]['wqi'],
             store[i]['timestamp'],            
         )
-    store.clear()
+    #clear localstore
+    store = []
 
 #Uplaod to firestore if no error
 try:

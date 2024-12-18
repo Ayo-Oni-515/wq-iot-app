@@ -46,7 +46,7 @@ def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temper
         "salinity": salinity, #obtain
         "tds": tds,
         "temperature": temperature,
-        "timestamp": timestamp, #datetime.now() - timedelta(hours=1), Makes sure the time is set to UTC+1 Nigerian Time
+        "timestamp": datetime.strptime(timestamp + "Z", "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%d %B %Y at %H:%M:%S UTC+1"), #Makes sure the time is set to UTC+1 Nigerian Time
         "turbidity": turbidity,
         "water_level": water_level, #obtain from tank water_level
         "wqi": wqi, #obtain from ccmewqi
