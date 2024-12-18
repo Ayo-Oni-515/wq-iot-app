@@ -14,6 +14,7 @@ class Ultrasonic_Sensor:
         self.max_level = max_level
         self.trigger_pin = trigger_pin
         self.echo_pin = echo_pin
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         # GPIO setup
         GPIO.setup(self.trigger_pin, GPIO.OUT)

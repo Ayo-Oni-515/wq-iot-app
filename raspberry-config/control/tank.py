@@ -46,6 +46,7 @@ class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
         self.min_level = min_level
         self.max_level = max_level
         self.tank_gpio = tank_gpio
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.tank_gpio, GPIO.OUT)
         # Relay is active-high

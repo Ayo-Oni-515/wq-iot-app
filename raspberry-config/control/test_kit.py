@@ -55,6 +55,7 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         self.outlet_valve = outlet_valve
         self.min_level = min_level
         self.max_level = max_level
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.inlet_valve, GPIO.OUT)
         GPIO.setup(self.outlet_valve, GPIO.OUT)
