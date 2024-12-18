@@ -39,8 +39,6 @@ from .ultrasonic import Ultrasonic_Sensor
 from .control_constants import TANK_LOW, TANK_HIGH, TANK_US_TRIG_GPIO,\
     TANK_US_ECHO_GPIO, TANK_RELAY_GPIO
 
-GPIO.setmode(GPIO.BCM)
-
 class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
     def __init__(self, min_level=TANK_LOW, max_level=TANK_HIGH, trigger_pin=TANK_US_TRIG_GPIO,\
                  echo_pin=TANK_US_ECHO_GPIO, tank_gpio= TANK_RELAY_GPIO):
@@ -48,7 +46,7 @@ class Tank_Ultrasonic_Sensor(Ultrasonic_Sensor):
         self.min_level = min_level
         self.max_level = max_level
         self.tank_gpio = tank_gpio
-
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.tank_gpio, GPIO.OUT)
         # Relay is active-high
         #GPIO.HIGH = turn on relay

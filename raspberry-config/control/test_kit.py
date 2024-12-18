@@ -46,8 +46,6 @@ from .ultrasonic import Ultrasonic_Sensor
 from .control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
     TEST_KIT_US_ECHO_GPIO, INLET_VALVE_RELAY_GPIO, OUTLET_VALVE_RELAY_GPIO
 
-GPIO.setmode(GPIO.BCM)
-
 class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
     def __init__(self, min_level=TEST_KIT_LOW, max_level=TEST_KIT_HIGH,\
                  trigger_pin=TEST_KIT_US_TRIG_GPIO, echo_pin=TEST_KIT_US_ECHO_GPIO,\
@@ -57,7 +55,7 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         self.outlet_valve = outlet_valve
         self.min_level = min_level
         self.max_level = max_level
-
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.inlet_valve, GPIO.OUT)
         GPIO.setup(self.outlet_valve, GPIO.OUT)
         # Relay is an active-low relay
