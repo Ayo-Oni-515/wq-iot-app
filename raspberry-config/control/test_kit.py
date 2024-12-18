@@ -5,28 +5,33 @@ This script handles the test kit's operation.
 """
 
 """
-Waterproof Ultrasonic Sensor: JSN-SR04T Integrated Ultrasonic Distance 
-Measuring Sensor Transducer Module Waterproof.
+Containment Ultrasonic Sensor: HC-SR04 Ultrasonic Sensor Module.
 
-Operating Voltage: 3.0 ~ 5.5V
+Operating Voltage: 5.0V
 
-Total Current: 30mA 
+Total Current: < 5mA
+
+Control Signal (Input): 
               
 Type: Digital Sensor.
 
-Unit: centimetres (cm)
+Unit: Meters (m)
 
-Trigger time: 10 microseconds
+Conversion Factor:
 
-Measuring Range: 25cm ~ 4m.
+Measuring Range: 2 ~ 450cm.
 
-Detecting Angle: 75°
+Effectual Angle: 15Â°
+
+Measuring Angle: 30Â°
 
 Working Frequency: 40kHz
 
 Blind Area: 20cm
 
-Threshold Value: mininimum level = 180cm, maximum level = 30cm
+Resolution: 0.3cm
+
+Threshold Value:
 
 """
 
@@ -41,6 +46,7 @@ from .ultrasonic import Ultrasonic_Sensor
 from .control_constants import TEST_KIT_LOW, TEST_KIT_HIGH, TEST_KIT_US_TRIG_GPIO,\
     TEST_KIT_US_ECHO_GPIO, INLET_VALVE_RELAY_GPIO, OUTLET_VALVE_RELAY_GPIO
 
+GPIO.setmode(GPIO.BCM)
 
 class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
     def __init__(self, min_level=TEST_KIT_LOW, max_level=TEST_KIT_HIGH,\
@@ -52,7 +58,6 @@ class Test_Kit_Ultrasonic_Sensor(Ultrasonic_Sensor):
         self.min_level = min_level
         self.max_level = max_level
 
-        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.inlet_valve, GPIO.OUT)
         GPIO.setup(self.outlet_valve, GPIO.OUT)
         # Relay is an active-low relay

@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+import RPi.GPIO as GPIO
 from main import quality_monitoring
 from localstore import get_local_json, update_local_json
 from firestore import update_realtime_firestore_data, update_firestore_data
+
+GPIO.setmode(GPIO.BCM)
 
 #carries out quality monitoring procedure 
 data = quality_monitoring()
@@ -70,3 +73,4 @@ except:
         data['wqi'])
 
 # time.sleep(900) #20 minutes delay time (Delay handled by crontab)
+GPIO.cleanup()

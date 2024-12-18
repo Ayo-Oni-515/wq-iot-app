@@ -3,6 +3,8 @@
 import RPi.GPIO as GPIO
 import time
 
+GPIO.setmode(GPIO.BCM)
+
 class Ultrasonic_Sensor_Error(Exception):
     """Custom exception for Ultrasonic Sensors."""
     pass
@@ -16,7 +18,6 @@ class Ultrasonic_Sensor:
         self.echo_pin = echo_pin
 
         # GPIO setup
-        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.trigger_pin, GPIO.OUT)
         GPIO.setup(self.echo_pin, GPIO.IN)
 
