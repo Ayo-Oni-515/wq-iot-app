@@ -35,7 +35,7 @@ def update_realtime_firestore_data(do, hardness, salinity, ph, tds, ec, turbidit
 
 
 #Data collection over time
-def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi, timestamp=datetime.now().isoformat() + "Z"):
+def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temperature, water_level, wqi, timestamp=datetime.now().isoformat()):
     # Add data to datastore
     datastore = db.collection("datastore")
     datastore.add({
