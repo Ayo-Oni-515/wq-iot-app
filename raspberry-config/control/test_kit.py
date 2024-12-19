@@ -31,7 +31,7 @@ Blind Area: 20cm
 
 Resolution: 0.3cm
 
-Threshold Value: mininimum level = 20cm, maximum level = 12cm
+Threshold Value: mininimum level = 20cm, maximum level = 6.5cm
 
 """
 

@@ -6,7 +6,6 @@ It merges the functionality of different aspects of the project such as
 sensor operation and control, solenoid valve control, ultrasonic sensor
 operation and control.
 """
-import time
 
 #Importing Essential Packages
 import sensors as snse
@@ -19,18 +18,14 @@ import ccmewqi as qi
 def pump_control(mode="Auto", switch=False):
     # Initialize Tank Sensor
     tank_ultrasonic_sensor = ctrl.tank.Tank_Ultrasonic_Sensor()
-    while True:
-        if mode == "Auto":
-            #Check tank water level
-            level = tank_ultrasonic_sensor.water_level()
-            if level >= tank_ultrasonic_sensor.min_level:
-                tank_ultrasonic_sensor.fill_tank()
-            time.sleep(2)
-        elif mode == "Manual":
-            # Apply remote control from the app
-            tank_ultrasonic_sensor.auto_mode(switch)
-        else:
-            break
+    if mode == "Auto":
+        #Check tank water level
+        level = tank_ultrasonic_sensor.water_level()
+        if level >= tank_ultrasonic_sensor.min_level:
+            tank_ultrasonic_sensor.fill_tank()
+    elif mode == "Manual":
+        # Apply remote control from the app
+        tank_ultrasonic_sensor.auto_mode(switch)
         
         
 # Runs every 20 minutes through cron

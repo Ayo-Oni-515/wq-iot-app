@@ -63,8 +63,8 @@ def listen_to_firestore():
         for doc in doc_snapshot:
             if doc.exists:
                 doc_data = doc.to_dict()
-                mode = doc_data['mode']
-                switch = doc_data['switch']
+                mode = doc_data.get("mode", "Auto")
+                switch = doc_data.get("switch", False)
 
     pump_control = db.collection("pumpControl").document("fCgyfcht2wPkn1TJ05KE")
     pump_snapshot = pump_control.on_snapshot(on_snapshot)

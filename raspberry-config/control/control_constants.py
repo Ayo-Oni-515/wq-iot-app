@@ -19,7 +19,7 @@ TANK_US_ECHO_GPIO = 16       #Tank US echo pin
 
 #test_kit CONSTANTS (centimeters): BCM Numbering           
 TEST_KIT_LOW = 20            #Empty Test Kit (cm) i.e. Length of the test kit
-TEST_KIT_HIGH = 12           #Full Test Kit (cm): Max Sensor immersion depth
+TEST_KIT_HIGH = 6.5          #Full Test Kit (cm): Max Sensor immersion depth
 TEST_KIT_US_TRIG_GPIO = 23   #Test kit US trigger pin    
 TEST_KIT_US_ECHO_GPIO = 24   #Test kit US echo pin
 

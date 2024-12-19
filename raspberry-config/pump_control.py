@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 
+import time 
 from main import pump_control
 from firestore import listen_to_firestore
 
 mode, switch = "Auto", False
 
-listener = listen_to_firestore()
+try:
+    # Asynchronously listen to changes to firestore.
+    listener = listen_to_firestore()
 
-pump_control(mode, switch)
+    while True:
+        pump_control(mode, switch)
+        time.sleep(2)
+finally:
+    # Unsubscribe from listener.
+    listener.unsubscribe()
 
-listener.unsubscribe()
