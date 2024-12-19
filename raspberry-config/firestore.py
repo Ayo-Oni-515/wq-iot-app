@@ -54,12 +54,11 @@ def update_firestore_data(do, hardness, salinity, ph, tds, ec, turbidity, temper
 
 
 #Receives a stream of data from firestore
-def listen_to_firestore():
+def listen_to_firestore(state):
     def on_snapshot(doc_snapshot, changes, read_time):
         """
         Callback function triggered whenever the document is updated.
         """
-        global state
         for doc in doc_snapshot:
             if doc.exists:
                 doc_data = doc.to_dict()

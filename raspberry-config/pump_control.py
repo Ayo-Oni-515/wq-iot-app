@@ -5,16 +5,13 @@ from main import pump_control
 from threading import Lock
 from firestore import listen_to_firestore
 
-#mode, switch = "Auto", False
-
 state = {"mode": "Auto", "switch": False}
 
 state_lock = Lock()
 
 try:
     # Asynchronously listen to changes to firestore.
-    listener = listen_to_firestore()
-    
+    listener = listen_to_firestore(state)
     
     while True:
         with state_lock:
