@@ -30,7 +30,8 @@ class _LinearChartState extends State<LinearChart> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator.adaptive(),
-            );          }
+            );
+          }
           if (snapshot.hasError) {
             return Center(child: Text('Firestore Synchronization Failed.'));
           }
@@ -40,7 +41,7 @@ class _LinearChartState extends State<LinearChart> {
           return SfCartesianChart(
             primaryXAxis: DateTimeAxis(
               dateFormat: DateFormat.yMd(),
-              intervalType: DateTimeIntervalType.days,
+              intervalType: DateTimeIntervalType.auto,
               majorGridLines: MajorGridLines(width: 0.8), // Thinner grid lines
               title: AxisTitle(text: 'Timestamp'),
             ), // X-Axis with category labels
